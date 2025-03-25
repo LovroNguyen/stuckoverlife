@@ -57,14 +57,29 @@
     }
     
     function updatePost($pdo, $postId, $title, $content, $moduleId) {
-        $query = 'UPDATE posts SET title = :title, content = :content, ModuleID = :moduleId, updatedAt = NOW() WHERE PostID = :postId';
-        $parameters = [
-            ':postId' => $postId, 
-            ':title' => $title, 
-            ':content' => $content, 
-            ':moduleId' => $moduleId
-        ];
-        query($pdo, $query, $parameters);
+        try {
+            $query = 'UPDATE posts SET title = :title, content = :content, ModuleID = :moduleId, updatedAt = NOW() WHERE PostID = :postId';
+            $parameters = [
+                ':postId' => $postId, 
+                ':title' => $title, 
+                ':content' => $content, 
+                ':moduleId' => $moduleId
+            ];
+            
+            $stmt = $pdo->prepare($query);
+            $result = $stmt->execute($parameters);
+            
+            if (!$result) {
+                error_log('Post Update Failed: ' . print_r($stmt->errorInfo(), true));
+                error_log('Post ID: ' . $postId);
+                error_log('New Content: ' . $content);
+            }
+            
+            return true;
+        } catch (PDOException $e) {
+            error_log('Post Update Exception: ' . $e->getMessage());
+            return false;
+        }
     }
 
     function deletePost($pdo, $postId) {
@@ -164,7 +179,6 @@
         return $result['count'] > 0;
     }
 
-    // Check if user owns a comment
     function userOwnsComment($pdo, $commentId, $userId) {
         $parameters = [':commentId' => $commentId, ':userId' => $userId];
         $query = query($pdo, 'SELECT COUNT(*) as count FROM comment WHERE CommentID = :commentId AND UserID = :userId', $parameters);
@@ -172,14 +186,28 @@
         return $result['count'] > 0;
     }
 
-    // Update a comment
     function updateComment($pdo, $commentId, $content) {
-        $query = 'UPDATE comment SET content = :content, updatedAt = NOW() WHERE CommentID = :commentId';
-        $parameters = [':commentId' => $commentId, ':content' => $content];
-        query($pdo, $query, $parameters);
+        try {
+            $query = 'UPDATE comment SET content = :content, updatedAt = NOW() WHERE CommentID = :commentId';
+            $parameters = [':commentId' => $commentId, ':content' => $content];
+            
+            $stmt = $pdo->prepare($query);
+            $result = $stmt->execute($parameters);
+            
+            // Add detailed error logging
+            if (!$result) {
+                error_log('Comment Update Failed: ' . print_r($stmt->errorInfo(), true));
+                error_log('Comment ID: ' . $commentId);
+                error_log('New Content: ' . $content);
+            }
+            
+            return $result;
+        } catch (PDOException $e) {
+            error_log('Comment Update Exception: ' . $e->getMessage());
+            return false;
+        }
     }
-
-    // Delete a comment
+    
     function deleteComment($pdo, $commentId) {
         $parameters = [':commentId' => $commentId];
         query($pdo, 'DELETE FROM comment WHERE CommentID = :commentId', $parameters);

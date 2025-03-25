@@ -5,8 +5,9 @@
         <div class="form-error"><?= htmlspecialchars($error, ENT_QUOTES, 'UTF-8') ?></div>
     <?php endif; ?>
     
-    <form action="<?= isset($post) ? '/coursework/posts.php?id=' . $post['PostID'] . '&action=edit' : '/coursework/create-post.php' ?>" method="post" class="post-form" enctype="multipart/form-data">
-        <div class="form-group">
+    <form action="<?= isset($post) ? '/coursework/controllers/post-controller.php?id=' . $post['PostID'] . '&action=edit' 
+                                    : '/coursework/create-post.php' 
+                    ?>" method="post" class="post-form" enctype="multipart/form-data">        <div class="form-group">
             <label for="title">Title</label>
             <input 
                 type="text" 

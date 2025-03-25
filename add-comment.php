@@ -1,84 +1,59 @@
 <?php
-// Start the session at the beginning of the script
+// Save as add-comment.php
 session_start();
-
-// Include necessary files
-include_once './includes/functions.php';
-include_once './includes/db.php';  // This should contain your PDO connection in $pdo
+include 'includes/db.php';
+include 'includes/functions.php';
 
 // Check if user is logged in
 if (!isLoggedIn()) {
-    header('Location: login.php');
+    header('Location: /coursework/login.php');
     exit();
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['comment'])) {
-    // Validate inputs
-    $post_id = isset($_POST['post_id']) ? (int)$_POST['post_id'] : 0;
-    $comment_content = isset($_POST['comment']) ? trim($_POST['comment']) : '';
+// Check if form was submitted
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $postId = $_POST['post_id'] ?? 0;
+    $commentContent = $_POST['comment'] ?? '';
+    $userId = $_SESSION['user_id'];
     
-    // Make sure user_id is available from session
-    if (!isset($_SESSION['user_id'])) {
-        // If somehow the user_id is not in session despite being logged in
-        header('Location: login.php');
+    // Validate input
+    if (empty($postId) || empty($commentContent)) {
+        $error = 'All fields are required';
+        header('Location: /coursework/posts.php?id=' . $postId . '&error=' . urlencode($error));
         exit();
     }
     
-    $user_id = $_SESSION['user_id'];
+    // Check if we're editing an existing comment or creating a new one
+    $commentId = $_POST['comment_id'] ?? '';
     
-    // Basic validation
-    $errors = [];
-    
-    if ($post_id <= 0) {
-        $errors[] = 'Invalid post ID';
-    }
-    
-    if (empty($comment_content)) {
-        $errors[] = 'Comment cannot be empty';
-    } elseif (strlen($comment_content) > 1000) {
-        $errors[] = 'Comment is too long (maximum 1000 characters)';
-    }
-    
-    // Check if post exists and is not deleted
-    if (empty($errors)) {
-        try {
-            $stmt = $pdo->prepare('SELECT PostID FROM posts WHERE PostID = ? AND status != "Deleted"');
-            $stmt->execute([$post_id]);
-            
-            if ($stmt->rowCount() === 0) {
-                $errors[] = 'Post not found or has been deleted';
-            }
-        } catch (PDOException $e) {
-            error_log('Database error in add-comment.php: ' . $e->getMessage());
-            $errors[] = 'A database error occurred. Please try again later.';
+    if (!empty($commentId)) {
+        // Editing an existing comment
+        // Verify user owns this comment
+        if (!userOwnsComment($pdo, $commentId, $userId)) {
+            header('Location: /coursework/posts.php?id=' . $postId);
+            exit();
         }
+        
+        // Update the comment
+        updateComment($pdo, $commentId, $commentContent);
+    } else {
+        // Adding a new comment
+        // Insert the comment
+        $query = 'INSERT INTO comment (content, createdAt, UserID, QuestionID) VALUES (:content, NOW(), :userId, :postId)';
+        $parameters = [
+            ':content' => $commentContent,
+            ':userId' => $userId,
+            ':postId' => $postId
+        ];
+        query($pdo, $query, $parameters);
     }
     
-    // Insert comment if no errors
-    if (empty($errors)) {
-        try {
-            $stmt = $pdo->prepare('INSERT INTO comment (content, QuestionID, UserID) VALUES (?, ?, ?)');
-            $result = $stmt->execute([$comment_content, $post_id, $user_id]);
-            
-            if ($result) {
-                $_SESSION['success_message'] = 'Comment added successfully!';
-            } else {
-                $errors[] = 'Failed to add comment';
-            }
-        } catch (PDOException $e) {
-            error_log('Database error in add-comment.php: ' . $e->getMessage());
-            $errors[] = 'A database error occurred. Please try again later.';
-        }
-    }
-    
-    if (!empty($errors)) {
-        $_SESSION['error_messages'] = $errors;
-    }
-    
-    header("Location: /coursework/posts.php?id=$post_id");
+    // Redirect to view the post
+    header('Location: /coursework/posts.php?id=' . $postId);
     exit();
 } else {
-    header('Location: index.php');
+    // If not a POST request, redirect to home
+    header('Location: /coursework/index.php');
     exit();
 }
 ?>

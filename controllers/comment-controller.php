@@ -21,7 +21,7 @@ switch ($action) {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Verify user owns this comment
             if (!userOwnsComment($pdo, $commentId, $userId)) {
-                header('Location: /coursework/controllers/posts.php?id=' . $postId);
+                header('Location: /coursework/posts.php?id=' . $postId);
                 exit();
             }
             
@@ -30,15 +30,13 @@ switch ($action) {
             // Validate input
             if (empty($content)) {
                 $error = 'Comment content is required';
-                header('Location: /coursework/controllers/posts.php?id=' . $postId . '&error=' . urlencode($error));
+                header('Location: /coursework/posts.php?id=' . $postId . '&error=' . urlencode($error));
                 exit();
             }
             
-            // Update the comment
             updateComment($pdo, $commentId, $content);
             
-            // Redirect to view the post
-            header('Location: /coursework/controllers/posts.php?id=' . $postId);
+            header('Location: /coursework/posts.php?id=' . $postId);
             exit();
         }
         break;
@@ -46,7 +44,7 @@ switch ($action) {
     case 'delete':
         // Verify user owns this comment
         if (!userOwnsComment($pdo, $commentId, $userId)) {
-            header('Location: /coursework/controllers/posts.php?id=' . $postId);
+            header('Location: /coursework/posts.php?id=' . $postId);
             exit();
         }
         
@@ -54,12 +52,12 @@ switch ($action) {
         deleteComment($pdo, $commentId);
         
         // Redirect to view the post
-        header('Location: /coursework/controllers/posts.php?id=' . $postId);
+        header('Location: /coursework/posts.php?id=' . $postId);
         exit();
         break;
         
     default:
-        header('Location: /coursework/controllers/posts.php?id=' . $postId);
+        header('Location: /coursework/posts.php?id=' . $postId);
         exit();
 }
 ?>

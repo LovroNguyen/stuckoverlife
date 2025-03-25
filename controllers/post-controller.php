@@ -1,5 +1,4 @@
 <?php
-// Save as controllers/post-controller.php
 session_start();
 include '../includes/db.php';
 include '../includes/functions.php';
@@ -27,7 +26,7 @@ switch ($action) {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Verify user owns this post
             if (!userOwnsPost($pdo, $postId, $userId)) {
-                header('Location: /coursework/controllers/posts.php?id=' . $postId);
+                header('Location: /coursework/posts.php?id=' . $postId);
                 exit();
             }
             
@@ -48,13 +47,13 @@ switch ($action) {
             updatePost($pdo, $postId, $title, $content, $moduleId);
             
             // Redirect to view the post
-            header('Location: /coursework/controllers/posts.php?id=' . $postId);
+            header('Location: /coursework/posts.php?id=' . $postId);
             exit();
         } else {
             // Display edit form
             // Verify user owns this post
             if (!userOwnsPost($pdo, $postId, $userId)) {
-                header('Location: /coursework/controllers/posts.php?id=' . $postId);
+                header('Location: /coursework/posts.php?id=' . $postId);
                 exit();
             }
             
@@ -76,7 +75,7 @@ switch ($action) {
     case 'delete':
         // Verify user owns this post
         if (!userOwnsPost($pdo, $postId, $userId)) {
-            header('Location: /coursework/controllers/posts.php?id=' . $postId);
+            header('Location: /coursework/posts.php?id=' . $postId);
             exit();
         }
         
@@ -89,7 +88,7 @@ switch ($action) {
         break;
         
     default:
-        header('Location: /coursework/controllers/posts.php?id=' . $postId);
+        header('Location: /coursework/posts.php?id=' . $postId);
         exit();
 }
 ?>

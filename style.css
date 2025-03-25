@@ -513,6 +513,96 @@ textarea {
     margin-right: 6px;
 }
 
+.post-owner-actions {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.edit-link, .delete-link {
+    display: inline-block;
+    padding: 4px 8px;
+    font-size: 12px;
+    color: #6a737c;
+    text-decoration: none;
+    border-radius: 3px;
+    transition: all 0.2s ease;
+}
+
+.edit-link {
+    color: #0077cc;
+}
+
+.edit-link:hover {
+    color: #0095ff;
+    background-color: #e6f4ff;
+}
+
+.delete-link {
+    color: #d1383d;
+}
+
+.delete-link:hover {
+    color: #c02d2f;
+    background-color: #fdf1f1;
+}
+
+/* Comment actions */
+.comment-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.comment-actions {
+    display: none;
+    margin-left: auto;
+    font-size: 12px;
+}
+
+.comment:hover .comment-actions {
+    display: inline-block;
+}
+
+.edit-comment-link, .delete-comment-link {
+    color: #6a737c;
+    margin-left: 8px;
+    text-decoration: none;
+    font-size: 11px;
+}
+
+.edit-comment-link:hover {
+    color: #0077cc;
+}
+
+.delete-comment-link:hover {
+    color: #d1383d;
+}
+
+/* Form cancel button */
+.form-cancel {
+    color: #6a737c;
+    background-color: #fff;
+    border: 1px solid #6a737c;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    margin-left: 8px;
+}
+
+.form-cancel:hover {
+    background-color: #f0f0f0;
+}
+
+/* Comment form actions */
+.form-actions {
+    display: flex;
+    margin-top: 8px;
+}
+
 /* Fix for your existing layout */
 .main-content {
     background-color: #f7f7f8;
