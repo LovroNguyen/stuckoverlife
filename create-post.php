@@ -36,38 +36,39 @@ try {
                 
                 // Upload image if provided
                 $assetId = null;
-                if (!empty($_FILES['image']['name']) && $_FILES['image']['error'] == 0) {
-                    $allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
-                    $uploadedType = $_FILES['image']['type'];
+                if (!empty($_FILES['images']['name'][0])) {
+                    $fileCount = count($_FILES['images']['name']);
                     
-                    if (!in_array($uploadedType, $allowedTypes)) {
-                        throw new Exception("Invalid file type. Only JPG, PNG, and GIF are allowed.");
-                    }
-                    
-                    // Generate unique filename
-                    $fileName = uniqid('post_') . '_' . $_FILES['image']['name'];
-                    $uploadPath = 'uploads/' . $fileName;
-                    
-                    // Create uploads directory if it doesn't exist
-                    if (!file_exists('uploads')) {
-                        mkdir('uploads', 0777, true);
-                    }
-                    
-                    // Move uploaded file
-                    if (move_uploaded_file($_FILES['image']['tmp_name'], $uploadPath)) {
-                        // Insert into asset table
-                        $stmt = $pdo->prepare("INSERT INTO asset (mediaKey, QuestionID) VALUES (?, ?)");
-                        $stmt->execute([$fileName, $postId]);
-                        $assetId = $pdo->lastInsertId();
+                    for ($i = 0; $i < $fileCount; $i++) {
+                        // Skip empty file inputs
+                        if ($_FILES['images']['error'][$i] != 0) continue;
                         
-                        // Update the post with the asset ID
-                        $stmt = $pdo->prepare("UPDATE posts SET AssetID = ? WHERE PostID = ?");
-                        $stmt->execute([$assetId, $postId]);
-                    } else {
-                        throw new Exception("Failed to upload image");
+                        $uploadedType = $_FILES['images']['type'][$i];
+                        $allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
+                        
+                        if (!in_array($uploadedType, $allowedTypes)) {
+                            throw new Exception("Invalid file type. Only JPG, PNG, and GIF are allowed.");
+                        }
+                        
+                        // Generate unique filename
+                        $fileName = uniqid('post_') . '_' . $_FILES['images']['name'][$i];
+                        $uploadPath = 'uploads/' . $fileName;
+                        
+                        // Create uploads directory if it doesn't exist
+                        if (!file_exists('uploads')) {
+                            mkdir('uploads', 0777, true);
+                        }
+                        
+                        // Move uploaded file
+                        if (move_uploaded_file($_FILES['images']['tmp_name'][$i], $uploadPath)) {
+                            // Insert new asset
+                            $stmt = $pdo->prepare("INSERT INTO asset (mediaKey, QuestionID) VALUES (?, ?)");
+                            $stmt->execute([$fileName, $postId]);
+                        } else {
+                            throw new Exception("Failed to upload image: " . $_FILES['images']['name'][$i]);
+                        }
                     }
                 }
-                
                 $pdo->commit();
                 
                 // Redirect to index page after successful post creation
@@ -79,7 +80,7 @@ try {
             }
         }
     }
-    
+
     ob_start();
     include './views/create-post.html.php';
     $output = ob_get_clean();

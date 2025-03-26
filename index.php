@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set('UTC');
 session_start();
 // Debug
 error_log('Index.php - Session check: ' . (isset($_SESSION['user_id']) ? 'User ID: '.$_SESSION['user_id'] : 'Not logged in'));

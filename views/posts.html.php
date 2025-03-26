@@ -23,10 +23,17 @@
             <div class="post-content post-view"><?= htmlspecialchars($post['content'], ENT_QUOTES, 'UTF-8') ?></div>
 
             <!-- image -->
-            <?php if (isset($post['asset']) && $post['asset']): ?>
-                <div class="post-image">
-                    <img width="760px" src="/coursework/uploads/<?= htmlspecialchars($post['asset']['mediaKey'], ENT_QUOTES, 'UTF-8') ?>" 
-                        alt="Post image">
+            <?php 
+            $postImages = getPostImages($pdo, $post['PostID']);
+            if (!empty($postImages)): 
+            ?>
+                <div class="post-images">
+                    <?php foreach($postImages as $image): ?>
+                        <div class="post-image">
+                            <img width="760px" src="/coursework/uploads/<?= htmlspecialchars($image['mediaKey'], ENT_QUOTES, 'UTF-8') ?>" 
+                                alt="Post image">
+                        </div>
+                    <?php endforeach; ?>
                 </div>
             <?php endif; ?>
 

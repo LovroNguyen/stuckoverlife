@@ -13,41 +13,51 @@
         return $query->fetchAll();
     }
 
-    function timeAgo( $datetime, $full = false )
-    {
-        $now = new DateTime;
-        $then = new DateTime( $datetime );
-        $diff = (array) $now->diff( $then );
-    
-        $diff['w']  = floor( $diff['d'] / 7 );
-        $diff['d'] -= $diff['w'] * 7;
-    
-        $string = array(
-            'y' => 'year',
-            'm' => 'month',
-            'w' => 'week',
-            'd' => 'day',
-            'h' => 'hour',
-            'i' => 'minute',
-            's' => 'second',
-        );
-    
-        foreach( $string as $k => & $v )
-        {
-            if ( $diff[$k] )
-            {
-                $v = $diff[$k] . ' ' . $v .( $diff[$k] > 1 ? 's' : '' );
-            }
-            else
-            {
-                unset( $string[$k] );
-            }
+    function timeAgo($datetime, $full = false) {
+        if (empty($datetime)) {
+            return 'unknown time';
         }
-    
-        if ( ! $full ) $string = array_slice( $string, 0, 1 );
-        return $string ? implode( ', ', $string ) . ' ago' : 'just now';
+        
+        static $now = null; // Cache the now time
+        
+        try {
+            if ($now === null) {
+                $now = new DateTime(); // Only create once per page load
+            }
+            $then = new DateTime($datetime);
+            
+            $diff = (array) $now->diff($then);
+            
+            // Convert days to weeks
+            $diff['w'] = floor($diff['d'] / 7);
+            $diff['d'] -= $diff['w'] * 7;
+            
+            $string = array(
+                'y' => 'year',
+                'm' => 'month',
+                'w' => 'week',
+                'd' => 'day',
+                'h' => 'hour',
+                'i' => 'minute',
+                's' => 'second',
+            );
+            
+            foreach($string as $k => &$v) {
+                if ($diff[$k]) {
+                    $v = $diff[$k] . ' ' . $v . ($diff[$k] > 1 ? 's' : '');
+                } else {
+                    unset($string[$k]);
+                }
+            }
+            
+            if (!$full) $string = array_slice($string, 0, 1);
+            return $string ? implode(', ', $string) . ' ago' : 'just now';
+        } catch (Exception $e) {
+            error_log('Error in timeAgo function: ' . $e->getMessage());
+            return 'unknown time';
+        }
     }
-    
+
     // post FUNCTION ===================================================================================================
 
     function getPost($pdo, $id) {
@@ -85,6 +95,25 @@
     function deletePost($pdo, $postId) {
         $parameters = [':postId' => $postId];
         query($pdo, 'DELETE FROM comment WHERE QuestionID = :postId', $parameters);
+        query($pdo, 'DELETE FROM posts WHERE PostID = :postId', $parameters);
+
+        // Get all images for this post
+        $images = getPostImages($pdo, $postId);
+        
+        // Delete each image file
+        foreach ($images as $image) {
+            $filePath = 'uploads/' . $image['mediaKey'];
+            if (file_exists($filePath)) {
+                unlink($filePath);
+            }
+        }
+        
+        $parameters = [':postId' => $postId];
+        // Delete image references
+        query($pdo, 'DELETE FROM asset WHERE QuestionID = :postId', $parameters);
+        // Delete comments
+        query($pdo, 'DELETE FROM comment WHERE QuestionID = :postId', $parameters);
+        // Delete the post
         query($pdo, 'DELETE FROM posts WHERE PostID = :postId', $parameters);
     }
 
@@ -213,6 +242,43 @@
         query($pdo, 'DELETE FROM comment WHERE CommentID = :commentId', $parameters);
     }
 
+    // Get all images for a post
+    function getPostImages($pdo, $postId) {
+        $parameters = [':postId' => $postId];
+        $query = query($pdo, 'SELECT * FROM asset WHERE QuestionID = :postId', $parameters);
+        return $query->fetchAll();
+    }
+
+    // Check if an image exists and belongs to a post
+    function imageExistsForPost($pdo, $assetId, $postId) {
+        $parameters = [':assetId' => $assetId, ':postId' => $postId];
+        $query = query($pdo, 'SELECT COUNT(*) as count FROM asset WHERE AssetID = :assetId AND QuestionID = :postId', $parameters);
+        $result = $query->fetch();
+        return $result['count'] > 0;
+    }
+
+    // Delete an image asset and its file
+    function deleteImageAsset($pdo, $assetId) {
+        // First get the image filename
+        $parameters = [':assetId' => $assetId];
+        $query = query($pdo, 'SELECT mediaKey FROM asset WHERE AssetID = :assetId', $parameters);
+        $asset = $query->fetch();
+        
+        if ($asset) {
+            // Delete the physical file
+            $filePath = 'uploads/' . $asset['mediaKey'];
+            if (file_exists($filePath)) {
+                unlink($filePath);
+            }
+            
+            // Delete the database record
+            query($pdo, 'DELETE FROM asset WHERE AssetID = :assetId', $parameters);
+            
+            return true;
+        }
+        
+        return false;
+    }
     // user FUNCTION ===================================================================================================
 
     function getUser($pdo, $id) {

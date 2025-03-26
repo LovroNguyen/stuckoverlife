@@ -20,6 +20,21 @@ if (!$post) {
     exit();
 }
 
+// Handle image deletion if requested
+if (isset($_GET['delete_image']) && !empty($_GET['delete_image'])) {
+    $assetId = $_GET['delete_image'];
+    
+    // Verify this image belongs to the post and user owns the post
+    if (userOwnsPost($pdo, $postId, $userId) && imageExistsForPost($pdo, $assetId, $postId)) {
+        // Delete the image file and record
+        deleteImageAsset($pdo, $assetId);
+        
+        // Redirect back to edit page
+        header('Location: /coursework/controllers/post-controller.php?id=' . $postId . '&action=edit');
+        exit();
+    }
+}
+
 switch ($action) {
     case 'edit':
         // Handle edit form submission
@@ -43,12 +58,62 @@ switch ($action) {
                 exit();
             }
             
-            // Update the post
-            updatePost($pdo, $postId, $title, $content, $moduleId);
-            
-            // Redirect to view the post
-            header('Location: /coursework/posts.php?id=' . $postId);
-            exit();
+            try {
+                // Begin transaction
+                $pdo->beginTransaction();
+                
+                // Update the post basic info
+                updatePost($pdo, $postId, $title, $content, $moduleId);
+                
+                // Handle multiple image uploads
+                if (!empty($_FILES['images']['name'][0])) {
+                    $fileCount = count($_FILES['images']['name']);
+                    
+                    for ($i = 0; $i < $fileCount; $i++) {
+                        // Skip empty file inputs
+                        if ($_FILES['images']['error'][$i] != 0) continue;
+                        
+                        $uploadedType = $_FILES['images']['type'][$i];
+                        $allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
+                        
+                        if (!in_array($uploadedType, $allowedTypes)) {
+                            throw new Exception("Invalid file type. Only JPG, PNG, and GIF are allowed.");
+                        }
+                        
+                        // Generate unique filename
+                        $fileName = uniqid('post_') . '_' . $_FILES['images']['name'][$i];
+                        $uploadPath = '../uploads/' . $fileName;
+                        
+                        // Create uploads directory if it doesn't exist
+                        if (!file_exists('../uploads')) {
+                            mkdir('../uploads', 0777, true);
+                        }
+                        
+                        // Move uploaded file
+                        if (move_uploaded_file($_FILES['images']['tmp_name'][$i], $uploadPath)) {
+                            // Insert new asset
+                            $stmt = $pdo->prepare("INSERT INTO asset (mediaKey, QuestionID) VALUES (?, ?)");
+                            $stmt->execute([$fileName, $postId]);
+                        } else {
+                            throw new Exception("Failed to upload image: " . $_FILES['images']['name'][$i]);
+                        }
+                    }
+                }
+                
+                $pdo->commit();
+                
+                // Redirect to view the post
+                header('Location: /coursework/posts.php?id=' . $postId);
+                exit();
+            } catch (Exception $e) {
+                $pdo->rollBack();
+                $error = $e->getMessage();
+                
+                // Get modules for form
+                $modules = allModules($pdo);
+                include '../views/create-post.html.php';
+                exit();
+            }
         } else {
             // Display edit form
             // Verify user owns this post
@@ -59,6 +124,9 @@ switch ($action) {
             
             // Get post data
             $post = getPost($pdo, $postId);
+            
+            // Get all images for this post
+            $post['images'] = getPostImages($pdo, $postId);
             
             // Get modules for form
             $modules = allModules($pdo);
@@ -79,7 +147,7 @@ switch ($action) {
             exit();
         }
         
-        // Delete the post
+        // Delete the post and all associated images
         deletePost($pdo, $postId);
         
         // Redirect to home

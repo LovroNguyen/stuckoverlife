@@ -7,7 +7,8 @@
     
     <form action="<?= isset($post) ? '/coursework/controllers/post-controller.php?id=' . $post['PostID'] . '&action=edit' 
                                     : '/coursework/create-post.php' 
-                    ?>" method="post" class="post-form" enctype="multipart/form-data">        <div class="form-group">
+                    ?>" method="post" class="post-form" enctype="multipart/form-data">
+        <div class="form-group">
             <label for="title">Title</label>
             <input 
                 type="text" 
@@ -47,25 +48,68 @@
             </select>
         </div>
         
+        <!-- Display existing images with delete options -->
+        <?php if (isset($post['images']) && !empty($post['images'])): ?>
+            <div class="form-group">
+                <label>Current Images</label>
+                <div class="current-images">
+                    <?php foreach ($post['images'] as $image): ?>
+                        <div class="image-item">
+                            <img src="/coursework/uploads/<?= htmlspecialchars($image['mediaKey'], ENT_QUOTES, 'UTF-8') ?>" 
+                                 width="100" alt="Post image">
+                            <a href="/coursework/controllers/post-controller.php?id=<?= $post['PostID'] ?>&action=edit&delete_image=<?= $image['AssetID'] ?>" 
+                               class="delete-image-link" 
+                               onclick="return confirm('Are you sure you want to delete this image?')">Delete</a>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        <?php endif; ?>
+        
         <div class="form-group">
-            <label for="image">Image (optional)</label>
+            <label for="images">Add Images (optional)</label>
             <input 
                 type="file" 
-                id="image" 
-                name="image" 
+                id="images" 
+                name="images[]" 
                 class="form-control" 
                 accept="image/*"
+                multiple
             >
-            <?php if (isset($post) && !empty($post['image'])): ?>
-                <p>Current image: <?= htmlspecialchars($post['image'], ENT_QUOTES, 'UTF-8') ?></p>
-            <?php endif; ?>
+            <small>You can select multiple images</small>
         </div>
         
         <div class="form-actions">
-            <a href="/coursework/index.php" class="form-cancel">Cancel</a>
+            <a href="<?= isset($post) ? '/coursework/posts.php?id=' . $post['PostID'] : '/coursework/index.php' ?>" class="form-cancel">Cancel</a>
             <button type="submit" name="save" class="form-submit">
                 <?= isset($post) ? 'Update Post' : 'Create Post' ?>
             </button>
         </div>
     </form>
 </div>
+
+<style>
+.current-images {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 10px;
+}
+.image-item {
+    border: 1px solid #dee0e1;
+    border-radius: 4px;
+    padding: 5px;
+    position: relative;
+}
+.delete-image-link {
+    display: block;
+    text-align: center;
+    margin-top: 5px;
+    color: #d1383d;
+    font-size: 12px;
+    text-decoration: none;
+}
+.delete-image-link:hover {
+    text-decoration: underline;
+}
+</style>
