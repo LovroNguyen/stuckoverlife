@@ -5,8 +5,8 @@
         <div class="form-error"><?= htmlspecialchars($error, ENT_QUOTES, 'UTF-8') ?></div>
     <?php endif; ?>
     
-    <form action="<?= isset($post) ? '/coursework/controllers/post-controller.php?id=' . $post['PostID'] . '&action=edit' 
-                                    : '/coursework/create-post.php' 
+    <form action="<?= isset($post) ? '/coursework/controllers/postController.php?id=' . $post['PostID'] . '&action=edit' 
+                                    : '/coursework/createPost.php' 
                     ?>" method="post" class="post-form" enctype="multipart/form-data">
         <div class="form-group">
             <label for="title">Title</label>
@@ -57,7 +57,7 @@
                         <div class="image-item">
                             <img src="/coursework/uploads/<?= htmlspecialchars($image['mediaKey'], ENT_QUOTES, 'UTF-8') ?>" 
                                  width="100" alt="Post image">
-                            <a href="/coursework/controllers/post-controller.php?id=<?= $post['PostID'] ?>&action=edit&delete_image=<?= $image['AssetID'] ?>" 
+                            <a href="/coursework/controllers/postController.php?id=<?= $post['PostID'] ?>&action=edit&delete_image=<?= $image['AssetID'] ?>" 
                                class="delete-image-link" 
                                onclick="return confirm('Are you sure you want to delete this image?')">Delete</a>
                         </div>

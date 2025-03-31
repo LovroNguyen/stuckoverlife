@@ -82,7 +82,7 @@ try {
     }
 
     ob_start();
-    include './views/create-post.html.php';
+    include './views/createPost.html.php';
     $output = ob_get_clean();
 } catch (PDOException $e) {
     $title = 'An error has occurred';

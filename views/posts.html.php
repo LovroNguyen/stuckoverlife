@@ -30,8 +30,11 @@
                 <div class="post-images">
                     <?php foreach($postImages as $image): ?>
                         <div class="post-image">
-                            <img width="760px" src="/coursework/uploads/<?= htmlspecialchars($image['mediaKey'], ENT_QUOTES, 'UTF-8') ?>" 
-                                alt="Post image">
+                        <img 
+                            src="/coursework/uploads/<?= htmlspecialchars($image['mediaKey'], ENT_QUOTES, 'UTF-8') ?>" 
+                            alt="Image for post: <?= htmlspecialchars(substr($post['title'], 0, 30), ENT_QUOTES, 'UTF-8') ?>"
+                            style="max-width: 760px;" 
+                            loading="lazy">
                         </div>
                     <?php endforeach; ?>
                 </div>
@@ -87,7 +90,7 @@
         
         <!-- Comment form -->
         <?php if (isLoggedIn()): ?>
-        <form method="post" action="/coursework/add-comment.php" class="comment-form" id="comment-form">
+        <form method="post" action="/coursework/addComment.php" class="comment-form" id="comment-form">
             <input type="hidden" name="post_id" value="<?= $post['PostID'] ?>">
             <input type="hidden" name="comment_id" id="comment_id" value="">
             <div class="form-group">
@@ -104,9 +107,10 @@
     </div>
 </div>
 
+
 <script>
     function editComment(commentId, content) {
-        document.getElementById('comment-form').action = '/coursework/controllers/comment-controller.php?action=edit&id=' + commentId + '&post_id=<?= $post['PostID'] ?>';
+        document.getElementById('comment-form').action = '/coursework/controllers/commentController.php?action=edit&id=' + commentId + '&post_id=<?= $post['PostID'] ?>';
         document.getElementById('comment_id').value = commentId;
         document.getElementById('comment-content').value = content;
         document.getElementById('comment-submit').textContent = 'Update Comment';
@@ -115,7 +119,7 @@
     
     function cancelEdit() {
         // Reset form
-        document.getElementById('comment-form').action = '/coursework/add-comment.php';
+        document.getElementById('comment-form').action = '/coursework/addComment.php';
         document.getElementById('comment_id').value = '';
         document.getElementById('comment-content').value = '';
         document.getElementById('comment-submit').textContent = 'Add Comment';
@@ -124,7 +128,7 @@
     
     function deleteComment(commentId, postId) {
         if (confirm('Are you sure you want to delete this comment?')) {
-            window.location.href = '/coursework/controllers/comment-controller.php?action=delete&id=' + commentId + '&post_id=' + postId;
+            window.location.href = '/coursework/controllers/commentController.php?action=delete&id=' + commentId + '&post_id=' + postId;
         }
     }
     

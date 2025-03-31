@@ -77,28 +77,72 @@
             display: flex;
             align-items: center;
             margin-left: auto;
+            gap: 16px;
         }
 
-        .header-nav-item {
-            display: inline-flex;
+        .sub-menu-wrap {
+            position: absolute;
+            top: 100%;
+            width: 320px;
+            max-height: 0px;
+            overflow: hidden;
+        }
+
+        .sub-menu-wrap.open-menu {
+            max-height: 500px;
+        }
+
+        .sub-menu {
+            background: #fff;
+            padding: 20px;
+            padding-bottom: 10px;
+            margin: 10px;
+            border-radius: 8px;
+            box-shadow: #e2e2e2 1px 5px 8px 2px;
+        }
+
+        .sub-menu-item {
+            display: flex;
             align-items: center;
-            margin-left: 16px;
-            color: #636466;
+        }
+
+        .sub-menu-item h3 {
+            font-weight: 500;
+        }
+
+        .sub-menu-item img {
+            margin-right: 15px;
+            border-radius: 8px;
+        }
+
+        .sub-menu hr{
+            border: 0;
+            height: 2px;
+            width: 100%;
+            background: #d0d3d7;
+            margin: 15px 0 10px;
+        }
+
+        .sub-menu-link {
+            display: flex;
+            height: 48px;
+            
+            align-items: center;
             text-decoration: none;
-            font-size: 14px;
-            transition: .2s;
-        }
-
-        .header-nav-item:hover {
             color: #000000;
+            margin: 6px 0;
+            padding: 12px;
         }
 
-        .header-nav-icon {
-            width: 24px;
-            height: 24px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
+        .sub-menu-link p {
+            font-weight: 500;
+            padding-left: 5%;
+            width: 65%;
+        }
+
+        .sub-menu-link:hover {
+            background-color: #f7f8f8;
+            border-radius: 8px;
         }
         
         .create-post-button, .signup-button {
@@ -134,8 +178,6 @@
             padding: 0 8px;
             font-size: 14px;
             cursor: pointer;
-            margin-left: 8px;
-            margin-right: 8px;
             transition: .2s;
         }
         

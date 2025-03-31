@@ -1,5 +1,5 @@
 <?php
-// Save as controllers/comment-controller.php
+// Save as controllers/commentController.php
 session_start();
 include '../includes/db.php';
 include '../includes/functions.php';

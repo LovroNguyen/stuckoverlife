@@ -13,7 +13,7 @@ if (!isLoggedIn()) {
 // Check if form was submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $postId = $_POST['post_id'] ?? 0;
-    $commentContent = $_POST['comment'] ?? '';
+    $commentContent = $_POST['content'] ?? '';
     $userId = $_SESSION['user_id'];
     
     // Validate input

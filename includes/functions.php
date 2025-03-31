@@ -214,27 +214,14 @@
         $result = $query->fetch();
         return $result['count'] > 0;
     }
-
+    
     function updateComment($pdo, $commentId, $content) {
-        try {
-            $query = 'UPDATE comment SET content = :content, updatedAt = NOW() WHERE CommentID = :commentId';
-            $parameters = [':commentId' => $commentId, ':content' => $content];
-            
-            $stmt = $pdo->prepare($query);
-            $result = $stmt->execute($parameters);
-            
-            // Add detailed error logging
-            if (!$result) {
-                error_log('Comment Update Failed: ' . print_r($stmt->errorInfo(), true));
-                error_log('Comment ID: ' . $commentId);
-                error_log('New Content: ' . $content);
-            }
-            
-            return $result;
-        } catch (PDOException $e) {
-            error_log('Comment Update Exception: ' . $e->getMessage());
-            return false;
-        }
+        $query = 'UPDATE comment SET content = :content WHERE CommentID = :commentId';
+        $parameters = [
+            ':content' => $content,
+            ':commentId' => $commentId
+        ];
+        return query($pdo, $query, $parameters);
     }
     
     function deleteComment($pdo, $commentId) {
