@@ -1,6 +1,6 @@
 <?php
 session_start();
 session_destroy();
-header('Location: /coursework/');
+header('Location: /coursework/index.php');
 exit();
 ?>

@@ -1,7 +1,7 @@
 <?php
 try {
-    include './includes/db.php';
-    include './includes/functions.php';
+    include '../includes/db.php';
+    include '../includes/functions.php';
     
     $title = 'Register';
     $error = '';
@@ -17,23 +17,19 @@ try {
         } elseif ($password !== $confirmPassword) {
             $error = 'Passwords do not match';
         } else {
-            try {
-                register($username, $password);
-                // Redirect to login
-                header('Location: /coursework/login?registered=true');
-                exit();
-            } catch (Exception $e) {
-                $error = $e->getMessage();
-            }
+            register($username, $password);
+            
+            header('Location: login.php?registered=true');
+            exit();
         }
     }
     
     ob_start();
-    include './views/signup.html.php';
+    include '../views/signup.html.php';
     $output = ob_get_clean();
 } catch (PDOException $e) {
     $title = 'An error has occurred';
     $output = 'Database error: ' . $e->getMessage();
 }
-include './views/layout.html.php';
+include '../views/layout.html.php';
 ?>

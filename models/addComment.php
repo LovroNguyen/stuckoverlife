@@ -1,12 +1,12 @@
 <?php
 // Save as add-comment.php
 session_start();
-include 'includes/db.php';
-include 'includes/functions.php';
+include '../includes/db.php';
+include '../includes/functions.php';
 
 // Check if user is logged in
 if (!isLoggedIn()) {
-    header('Location: /coursework/login');
+    header('Location: /coursework/login.php');
     exit();
 }
 
@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Validate input
     if (empty($postId) || empty($commentContent)) {
         $error = 'All fields are required';
-        header('Location: /coursework/post/' . $postId . '?error=' . urlencode($error));
+        header('Location: /coursework/posts.php?id=' . $postId . '&error=' . urlencode($error));
         exit();
     }
     
@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Editing an existing comment
         // Verify user owns this comment
         if (!userOwnsComment($pdo, $commentId, $userId)) {
-            header('Location: /coursework/post/' . $postId);
+            header('Location: /coursework/posts.php?id=' . $postId);
             exit();
         }
         
@@ -49,11 +49,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     
     // Redirect to view the post
-    header('Location: /coursework/post/' . $postId);
+    header('Location: /coursework/posts.php?id=' . $postId);
     exit();
 } else {
     // If not a POST request, redirect to home
-    header('Location: /coursework/');
+    header('Location: /coursework/index.php');
     exit();
 }
 ?>

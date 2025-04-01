@@ -3,7 +3,7 @@
         <div class="post-with-votes">
             <div class="post-main">
                 <div class="post-header">
-                    <a class="post-title" href="/coursework/posts.php?id=<?= $post['PostID'] ?>"><?= htmlspecialchars($post['title'], ENT_QUOTES, 'UTF-8') ?></a>
+                    <a class="post-title" href="/coursework/models/posts.php?id=<?= $post['PostID'] ?>"><?= htmlspecialchars($post['title'], ENT_QUOTES, 'UTF-8') ?></a>
                     
                     <div class="user-info">
                         <div class="user-avatar">

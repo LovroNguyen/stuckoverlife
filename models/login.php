@@ -1,8 +1,8 @@
 <?php
 session_start();
 try {
-    include './includes/db.php';
-    include './includes/functions.php';
+    include '../includes/db.php';
+    include '../includes/functions.php';
     
     $title = 'Login';
     $error = '';
@@ -30,7 +30,7 @@ try {
                 $_SESSION['username'] = $user['username'];
                 
                 // Redirect to homepage
-                header('Location: /coursework/');
+                header('Location: /coursework/index.php');
                 exit();
             } else {
                 $error = 'Invalid username or password';
@@ -40,11 +40,11 @@ try {
     
     ob_start();
 
-    include './views/login.html.php';
+    include '../views/login.html.php';
     $output = ob_get_clean();
 } catch (PDOException $e) {
     $title = 'An error has occurred';
     $output = 'Database error: ' . $e->getMessage();
 }
-include './views/layout.html.php';
+include '../views/layout.html.php';
 ?>

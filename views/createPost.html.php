@@ -6,7 +6,7 @@
     <?php endif; ?>
     
     <form action="<?= isset($post) ? '/coursework/controllers/postController.php?id=' . $post['PostID'] . '&action=edit' 
-                                    : '/coursework/createPost.php' 
+                                    : '/coursework/models/createPost.php' 
                     ?>" method="post" class="post-form" enctype="multipart/form-data">
         <div class="form-group">
             <label for="title">Title</label>
@@ -80,7 +80,7 @@
         </div>
         
         <div class="form-actions">
-            <a href="<?= isset($post) ? '/coursework/posts.php?id=' . $post['PostID'] : '/coursework/index.php' ?>" class="form-cancel">Cancel</a>
+            <a href="<?= isset($post) ? '/coursework/models/posts.php?id=' . $post['PostID'] : '/coursework/index.php' ?>" class="form-cancel">Cancel</a>
             <button type="submit" name="save" class="form-submit">
                 <?= isset($post) ? 'Update Post' : 'Create Post' ?>
             </button>

@@ -5,7 +5,7 @@
         <div class="form-error"><?= htmlspecialchars($error, ENT_QUOTES, 'UTF-8') ?></div>
     <?php endif; ?>
     
-    <form action="/coursework/register.php" method="post" class="auth-form">
+    <form action="/coursework/models/register.php" method="post" class="auth-form">
         <div class="form-group">
             <label for="username">Username</label>
             <input 
@@ -46,7 +46,7 @@
         </div>
         
         <div class="form-group text-center">
-            <p>Already have an account? <a href="/coursework/login.php">Log in</a></p>
+            <p>Already have an account? <a href="/coursework/models/login.php">Log in</a></p>
         </div>
     </form>
 </div>

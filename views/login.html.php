@@ -9,7 +9,7 @@
         <div class="form-success"><?= htmlspecialchars($success, ENT_QUOTES, 'UTF-8') ?></div>
     <?php endif; ?>
     
-    <form action="/coursework/login.php" method="post" class="auth-form">
+    <form action="/coursework/models/login.php" method="post" class="auth-form">
         <div class="form-group">
             <label for="username">Username</label>
             <input 
@@ -39,7 +39,7 @@
         </div>
         
         <div class="form-group text-center">
-            <p>Don't have an account? <a href="/coursework/register.php">Sign up</a></p>
+            <p>Don't have an account? <a href="/coursework/models/register.php">Sign up</a></p>
         </div>
     </form>
 </div>

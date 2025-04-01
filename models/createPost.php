@@ -23,11 +23,56 @@ try {
             $error = 'All fields are required';
         } else {
             try {
+                // Begin transaction
+                $pdo->beginTransaction();
                 
-                createPost($postTitle, $content,$_SESSION['user_id'] , $moduleId);
+                // Create post
+                $stmt = $pdo->prepare("
+                    INSERT INTO posts (title, content, ModuleID, UserID)
+                    VALUES (?, ?, ?, ?)
+                ");
+                $stmt->execute([$postTitle, $content, $moduleId, $_SESSION['user_id']]);
+                $postId = $pdo->lastInsertId();
+                
+                // Upload image if provided
+                $assetId = null;
+                if (!empty($_FILES['images']['name'][0])) {
+                    $fileCount = count($_FILES['images']['name']);
+                    
+                    for ($i = 0; $i < $fileCount; $i++) {
+                        // Skip empty file inputs
+                        if ($_FILES['images']['error'][$i] != 0) continue;
+                        
+                        $uploadedType = $_FILES['images']['type'][$i];
+                        $allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
+                        
+                        if (!in_array($uploadedType, $allowedTypes)) {
+                            throw new Exception("Invalid file type. Only JPG, PNG, and GIF are allowed.");
+                        }
+                        
+                        // Generate unique filename
+                        $fileName = uniqid('post_') . '_' . $_FILES['images']['name'][$i];
+                        $uploadPath = 'uploads/' . $fileName;
+                        
+                        // Create uploads directory if it doesn't exist
+                        if (!file_exists('uploads')) {
+                            mkdir('uploads', 0777, true);
+                        }
+                        
+                        // Move uploaded file
+                        if (move_uploaded_file($_FILES['images']['tmp_name'][$i], $uploadPath)) {
+                            // Insert new asset
+                            $stmt = $pdo->prepare("INSERT INTO asset (mediaKey, QuestionID) VALUES (?, ?)");
+                            $stmt->execute([$fileName, $postId]);
+                        } else {
+                            throw new Exception("Failed to upload image: " . $_FILES['images']['name'][$i]);
+                        }
+                    }
+                }
+                $pdo->commit();
                 
                 // Redirect to index page after successful post creation
-                header('Location: /coursework/');
+                header('Location: index.php');
                 exit();
             } catch (Exception $e) {
                 $pdo->rollBack();

@@ -193,6 +193,10 @@
             overflow: hidden;
         }
 
+        .user-avatar.avatar-button:active {
+            transform: scale(0.94);
+        }
+
 /* Dropdown menu styles */
 .dropdown {
     position: relative;

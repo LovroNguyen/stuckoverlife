@@ -1,8 +1,8 @@
 <?php
 session_start();
 try {
-    include './includes/db.php';
-    include './includes/functions.php';
+    include '../includes/db.php';
+    include '../includes/functions.php';
     
     // Require login
     requireLogin();
@@ -23,12 +23,20 @@ try {
                 // Begin transaction
                 $pdo->beginTransaction();
                 
-                // ============ Contact Mod Function ================
+                // Create post
+                // the message
+                $msg = "$content";
+
+                // use wordwrap() if lines are longer than 70 characters
+                $msg = wordwrap($msg,70);
+
+                // send email
+                mail("lovronguyen2@gmail.com",$title,$msg);
                                 
                 $pdo->commit();
                 
                 // Redirect to index page after successful post creation
-                header('Location: /coursework/');
+                header('Location: index.php');
                 exit();
             } catch (Exception $e) {
                 $pdo->rollBack();
@@ -38,12 +46,12 @@ try {
     }
 
     ob_start();
-    include './views/support.html.php';
+    include '../views/support.html.php';
     $output = ob_get_clean();
 } catch (PDOException $e) {
     $title = 'An error has occurred';
     $output = 'Database error: ' . $e->getMessage();
 }
 
-include './views/layout.html.php';
+include '../views/layout.html.php';
 ?>

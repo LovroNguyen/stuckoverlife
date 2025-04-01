@@ -90,7 +90,7 @@
         
         <!-- Comment form -->
         <?php if (isLoggedIn()): ?>
-        <form method="post" action="/coursework/addComment.php" class="comment-form" id="comment-form">
+        <form method="post" action="/coursework/models/addComment.php" class="comment-form" id="comment-form">
             <input type="hidden" name="post_id" value="<?= $post['PostID'] ?>">
             <input type="hidden" name="comment_id" id="comment_id" value="">
             <div class="form-group">
@@ -119,7 +119,7 @@
     
     function cancelEdit() {
         // Reset form
-        document.getElementById('comment-form').action = '/coursework/addComment.php';
+        document.getElementById('comment-form').action = '/coursework/models/addComment.php';
         document.getElementById('comment_id').value = '';
         document.getElementById('comment-content').value = '';
         document.getElementById('comment-submit').textContent = 'Add Comment';

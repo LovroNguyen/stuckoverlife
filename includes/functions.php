@@ -405,7 +405,7 @@
 
     function requireLogin() {
         if (!isLoggedIn()) {
-            header('Location: /coursework/login');
+            header('Location: /coursework/models/login.php');
             exit();
         }
     }
