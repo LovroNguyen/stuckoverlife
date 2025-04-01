@@ -45,7 +45,11 @@
                                     <i data-visualcompletion="css-img" class="sub-menu-link-icon" aria-hidden="true" style="background-image: url(&quot;https://static.xx.fbcdn.net/rsrc.php/v4/yf/r/N1cx5zPsD4a.png&quot;); background-position: 0px -419px; background-size: auto; width: 20px; height: 20px; background-repeat: no-repeat; display: inline-block;"></i>                                    
                                     <p>Settings</p>
                                     <i data-visualcompletion="css-img" class="point-right-arrow" aria-hidden="true" style="margin-left: auto;font-size: 22px;background-image: url(&quot;https://static.xx.fbcdn.net/rsrc.php/v4/yU/r/ETqWQ46BPZV.png&quot;); background-position: 0px -50px; background-size: auto; width: 24px; height: 24px; background-repeat: no-repeat; display: inline-block;"></i>
-                                </a>
+                                    </a>
+                                    <a href="#" class="sub-menu-link">
+                                    <i data-visualcompletion="css-img" class="x1b0d499 xep6ejk" aria-hidden="true" style="background-image: url(&quot;https://static.xx.fbcdn.net/rsrc.php/v4/yT/r/uUd4Xa0YZdV.png&quot;); background-position: 0px -67px; background-size: auto; width: 20px; height: 20px; background-repeat: no-repeat; display: inline-block;"></i>                                    <p>Feedbacks</p>
+                                    <i data-visualcompletion="css-img" class="point-right-arrow" aria-hidden="true" style="margin-left: auto;font-size: 22px;background-image: url(&quot;https://static.xx.fbcdn.net/rsrc.php/v4/yU/r/ETqWQ46BPZV.png&quot;); background-position: 0px -50px; background-size: auto; width: 24px; height: 24px; background-repeat: no-repeat; display: inline-block;"></i>
+                                    </a>
                                 <?php endif; ?>
                                 <a href="/coursework/support.php" class="sub-menu-link">
                                     <i data-visualcompletion="css-img" class="sub-menu-link-icon" aria-hidden="true" style="background-image: url(&quot;https://static.xx.fbcdn.net/rsrc.php/v4/y9/r/SRMpAnW50Ui.png&quot;); background-position: 0px -193px; background-size: auto; width: 20px; height: 20px; background-repeat: no-repeat; display: inline-block;"></i>

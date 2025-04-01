@@ -1,6 +1,4 @@
 <?php
-
-
     function query($pdo, $sql, $parameters = []) {
         $query = $pdo->prepare($sql);
         $query->execute($parameters);
@@ -66,6 +64,58 @@
         return $query->fetch();
     }
     
+    function createPost($postTitle, $content, $userId, $moduleId) {
+        global $pdo;
+        // Begin transaction
+        $pdo->beginTransaction();
+                        
+        // Create post - fixed parameter order to match columns
+        $stmt = $pdo->prepare("
+            INSERT INTO posts (title, content, ModuleID, UserID)
+            VALUES (?, ?, ?, ?)
+        ");
+        $stmt->execute([$postTitle, $content, $moduleId, $userId]); // Fixed parameter order
+        $postId = $pdo->lastInsertId();
+    
+        // Upload image if provided
+        $assetId = null;
+        if (!empty($_FILES['images']['name'][0])) {
+            $fileCount = count($_FILES['images']['name']);
+            
+            for ($i = 0; $i < $fileCount; $i++) {
+                // Skip empty file inputs
+                if ($_FILES['images']['error'][$i] != 0) continue;
+                
+                $uploadedType = $_FILES['images']['type'][$i];
+                $allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
+                
+                if (!in_array($uploadedType, $allowedTypes)) {
+                    throw new Exception("Invalid file type. Only JPG, PNG, and GIF are allowed.");
+                }
+                
+                // Generate unique filename
+                $fileName = uniqid('post_') . '_' . $_FILES['images']['name'][$i];
+                $uploadPath = 'uploads/' . $fileName;
+                
+                // Create uploads directory if it doesn't exist
+                if (!file_exists('uploads')) {
+                    mkdir('uploads', 0777, true);
+                }
+                
+                // Move uploaded file
+                if (move_uploaded_file($_FILES['images']['tmp_name'][$i], $uploadPath)) {
+                    // Insert new asset
+                    $stmt = $pdo->prepare("INSERT INTO asset (mediaKey, QuestionID) VALUES (?, ?)");
+                    $stmt->execute([$fileName, $postId]);
+                } else {
+                    throw new Exception("Failed to upload image: " . $_FILES['images']['name'][$i]);
+                }
+            }
+        }
+        $pdo->commit();
+        return $postId; // Return the new post ID
+    }
+
     function updatePost($pdo, $postId, $title, $content, $moduleId) {
         try {
             $query = 'UPDATE posts SET title = :title, content = :content, ModuleID = :moduleId, updatedAt = NOW() WHERE PostID = :postId';
@@ -115,12 +165,6 @@
         query($pdo, 'DELETE FROM comment WHERE QuestionID = :postId', $parameters);
         // Delete the post
         query($pdo, 'DELETE FROM posts WHERE PostID = :postId', $parameters);
-    }
-
-    function createPost($pdo, $title, $content, $userid, $moduleid) {
-        $query = 'INSERT INTO posts (title, content, createdAt, userid, moduleid) VALUES (:title, :content, CURDATE(), :userid, :moduleid)';
-        $parameters = [':title' => $title, ':content' => $content, ':userid' => $userid, ':moduleid' => $moduleid];
-        query($pdo, $query, $parameters);
     }
 
     function allPosts($pdo){
@@ -215,6 +259,16 @@
         return $result['count'] > 0;
     }
     
+    function addComment($pdo, $postId, $commentContent, $userId) {
+        $query = 'INSERT INTO comment (content, createdAt, UserID, QuestionID) VALUES (:content, NOW(), :userId, :postId)';
+        $parameters = [
+            ':content' => $commentContent,
+            ':userId' => $userId,
+            ':postId' => $postId
+        ];
+        return query($pdo, $query, $parameters);
+    }
+
     function updateComment($pdo, $commentId, $content) {
         $query = 'UPDATE comment SET content = :content WHERE CommentID = :commentId';
         $parameters = [
@@ -267,6 +321,33 @@
         return false;
     }
     // user FUNCTION ===================================================================================================
+
+    function register($username, $password) {
+        global $pdo;
+    
+        // Check if username or email already exists
+        $params = [':username' => $username];
+        $checkUser = query($pdo, 'SELECT * FROM user WHERE username = :username', $params);
+            
+        if ($checkUser->rowCount() > 0) {
+            throw new Exception('Username already exists');
+        } else {
+            // Hash password
+            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+            
+            // Create user
+            $insertParams = [
+                ':username' => $username,
+                ':password' => $hashedPassword
+            ];
+            
+            query($pdo, 'INSERT INTO user (username, password) VALUES (:username, :password)', $insertParams);
+            
+            // Use a separate parameter array for the SELECT query
+            $selectParams = [':username' => $username];
+            return query($pdo, 'SELECT * FROM user WHERE username = :username', $selectParams)->fetch();
+        }
+    }
 
     function getUser($pdo, $id) {
         $parameters = [':id' => $id];
@@ -324,7 +405,7 @@
 
     function requireLogin() {
         if (!isLoggedIn()) {
-            header('Location: login.php');
+            header('Location: /coursework/login');
             exit();
         }
     }
