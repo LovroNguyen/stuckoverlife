@@ -280,7 +280,16 @@
     }
 
     function isAdmin() {
+        if (!isLoggedIn()) {
+            return false;
+        }
         
+        global $pdo;
+        $params = [':id' => $_SESSION['user_id']];
+        $query = query($pdo, 'SELECT role FROM user WHERE UserID = :id', $params);
+        $user = $query->fetch();
+        
+        return ($user && $user['role'] === 'admin');
     }
 
     function getUserByPost($pdo, $id) {

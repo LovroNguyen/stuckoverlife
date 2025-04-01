@@ -57,7 +57,7 @@
                 <!-- Post owner actions -->
                 <?php if (isLoggedIn() && userOwnsPost($pdo, $post['PostID'], $_SESSION['user_id'])): ?>
                 <div class="post-owner-actions">
-                    <a href="/coursework/controllers/post-controller.php?id=<?= $post['PostID'] ?>&action=edit" class="edit-link">Edit</a>
+                    <a href="/coursework/controllers/postController.php?id=<?= $post['PostID'] ?>&action=edit" class="edit-link">Edit</a>
                     <a href="#" class="delete-link" onclick="deletePost(<?= $post['PostID'] ?>)">Delete</a>
                 </div>
                 <?php endif; ?>
@@ -134,7 +134,7 @@
     
     function deletePost(postId) {
         if (confirm('Are you sure you want to delete this post? This action cannot be undone.')) {
-            window.location.href = '/coursework/controllers/post-controller.php?action=delete&id=' + postId;
+            window.location.href = '/coursework/controllers/postController.php?action=delete&id=' + postId;
         }
     }
 </script>

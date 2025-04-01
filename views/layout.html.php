@@ -18,7 +18,7 @@
                 <input type="text" placeholder="Search something...">
             </div>
             <nav class="header-nav">
-                <a href="/coursework/create_post.php" class="create-post-button">
+                <a href="/coursework/createPost.php" class="create-post-button">
                     Create Post
                 </a>
                 
@@ -40,12 +40,14 @@
                                     <p>Profile</p>
                                     <i data-visualcompletion="css-img" class="point-right-arrow" aria-hidden="true" style="margin-left: auto;font-size: 22px;background-image: url(&quot;https://static.xx.fbcdn.net/rsrc.php/v4/yU/r/ETqWQ46BPZV.png&quot;); background-position: 0px -50px; background-size: auto; width: 24px; height: 24px; background-repeat: no-repeat; display: inline-block;"></i>
                                 </a>
-                                <a href="#" class="sub-menu-link">
+                                <?php if(isAdmin()):?>
+                                    <a href="#" class="sub-menu-link">
                                     <i data-visualcompletion="css-img" class="sub-menu-link-icon" aria-hidden="true" style="background-image: url(&quot;https://static.xx.fbcdn.net/rsrc.php/v4/yf/r/N1cx5zPsD4a.png&quot;); background-position: 0px -419px; background-size: auto; width: 20px; height: 20px; background-repeat: no-repeat; display: inline-block;"></i>                                    
                                     <p>Settings</p>
                                     <i data-visualcompletion="css-img" class="point-right-arrow" aria-hidden="true" style="margin-left: auto;font-size: 22px;background-image: url(&quot;https://static.xx.fbcdn.net/rsrc.php/v4/yU/r/ETqWQ46BPZV.png&quot;); background-position: 0px -50px; background-size: auto; width: 24px; height: 24px; background-repeat: no-repeat; display: inline-block;"></i>
                                 </a>
-                                <a href="#" class="sub-menu-link">
+                                <?php endif; ?>
+                                <a href="/coursework/support.php" class="sub-menu-link">
                                     <i data-visualcompletion="css-img" class="sub-menu-link-icon" aria-hidden="true" style="background-image: url(&quot;https://static.xx.fbcdn.net/rsrc.php/v4/y9/r/SRMpAnW50Ui.png&quot;); background-position: 0px -193px; background-size: auto; width: 20px; height: 20px; background-repeat: no-repeat; display: inline-block;"></i>
                                     <p>Help & Support</p>
                                     <i data-visualcompletion="css-img" class="point-right-arrow" aria-hidden="true" style="margin-left: auto;font-size: 22px;background-image: url(&quot;https://static.xx.fbcdn.net/rsrc.php/v4/yU/r/ETqWQ46BPZV.png&quot;); background-position: 0px -50px; background-size: auto; width: 24px; height: 24px; background-repeat: no-repeat; display: inline-block;"></i>
@@ -75,9 +77,6 @@
                 <?php if(isLoggedIn()): ?>
                     <h3>Quote of the day</h3>
                     <p>"The only way to do great work is to love what you do." </br>- Steve Jobs</p>
-                    <?php if(isAdmin()):?>
-                        <a href="#" class="button">Dash board</a> <br>
-                    <?php endif; ?>
                 <?php else: ?>
                     <p>Welcome to Stuck Overlife!</p>
                     <p>Please <a href="/coursework/login.php">log in</a> or <a href="/coursework/register.php">sign up</a> to post questions and answers.</p>

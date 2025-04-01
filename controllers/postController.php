@@ -30,7 +30,7 @@ if (isset($_GET['delete_image']) && !empty($_GET['delete_image'])) {
         deleteImageAsset($pdo, $assetId);
         
         // Redirect back to edit page
-        header('Location: /coursework/controllers/post-controller.php?id=' . $postId . '&action=edit');
+        header('Location: /coursework/controllers/postController.php?id=' . $postId . '&action=edit');
         exit();
     }
 }
@@ -54,7 +54,7 @@ switch ($action) {
                 $error = 'All fields are required';
                 // Get modules for form
                 $modules = allModules($pdo);
-                include '../views/create-post.html.php';
+                include '/coursework/views/createPost.html.php';
                 exit();
             }
             
@@ -111,7 +111,7 @@ switch ($action) {
                 
                 // Get modules for form
                 $modules = allModules($pdo);
-                include '../views/create-post.html.php';
+                include '/coursework/views/createPost.html.php';
                 exit();
             }
         } else {
@@ -134,7 +134,7 @@ switch ($action) {
             // Display edit form
             $title = 'Edit Post - Stuck Overlife';
             ob_start();
-            include '../views/create-post.html.php';
+            include '../views/createPost.html.php';
             $output = ob_get_clean();
             include '../views/layout.html.php';
         }
