@@ -680,7 +680,7 @@ blockquote {
             font-weight: var(--base-text-weight-bold, 700);
             margin-bottom: 16px;
             display: flex;
-            gap: 16px;
+            gap: 16Fpx;
             align-items: center;
         }
 
@@ -759,6 +759,14 @@ blockquote {
                 color: #59636e;
             }
             
+            .profile-header-container {
+                font-size: 24px;
+                font-weight: 700;
+                margin-bottom: 16px;
+                margin-top: -15px;
+                display: flex;
+            }
+
             .stat-item {
                 display: flex;
                 flex-direction: column;

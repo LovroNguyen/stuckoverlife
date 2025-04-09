@@ -6,7 +6,7 @@ include '../includes/functions.php';
 
 // Check if user is logged in
 if (!isLoggedIn()) {
-    header('Location: /coursework/login.php');
+    header('Location: /coursework/models/login.php');
     exit();
 }
 
@@ -21,7 +21,7 @@ switch ($action) {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Verify user owns this comment
             if (!userOwnsComment($pdo, $commentId, $userId)) {
-                header('Location: /coursework/posts.php?id=' . $postId);
+                header('Location: /coursework/models/posts.php?id=' . $postId);
                 exit();
             }
             
@@ -30,13 +30,13 @@ switch ($action) {
             // Validate input
             if (empty($content)) {
                 $error = 'Comment content is required';
-                header('Location: /coursework/posts.php?id=' . $postId . '&error=' . urlencode($error));
+                header('Location: /coursework/models/posts.php?id=' . $postId . '&error=' . urlencode($error));
                 exit();
             }
             
             updateComment($pdo, $commentId, $content);
             
-            header('Location: /coursework/posts.php?id=' . $postId);
+            header('Location: /coursework/models/posts.php?id=' . $postId);
             exit();
         }
         break;
@@ -44,7 +44,7 @@ switch ($action) {
     case 'delete':
         // Verify user owns this comment
         if (!userOwnsComment($pdo, $commentId, $userId)) {
-            header('Location: /coursework/posts.php?id=' . $postId);
+            header('Location: /coursework/models/posts.php?id=' . $postId);
             exit();
         }
         
@@ -52,12 +52,12 @@ switch ($action) {
         deleteComment($pdo, $commentId);
         
         // Redirect to view the post
-        header('Location: /coursework/posts.php?id=' . $postId);
+        header('Location: /coursework/models/posts.php?id=' . $postId);
         exit();
         break;
         
     default:
-        header('Location: /coursework/posts.php?id=' . $postId);
+        header('Location: /coursework/models/posts.php?id=' . $postId);
         exit();
 }
 ?>

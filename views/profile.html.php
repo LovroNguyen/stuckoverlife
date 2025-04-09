@@ -1,11 +1,23 @@
 <?php
-$currentUserId = $_SESSION['user_id'];
+$posts = isset($userPosts) ? $userPosts : [];
+$avatar = htmlspecialchars($profileUser['avatar'], ENT_QUOTES, 'UTF-8');
+?>
 
-$posts = getPostByUser($pdo, $currentUserId);
+<div class="profile-header-container">
+    <?php if(isset($isOwnProfile) && $isOwnProfile): ?>
+        <p>My Profile</p>
+    <?php else: ?>
+        <p><?= htmlspecialchars($profileUser['username'], ENT_QUOTES, 'UTF-8') ?>'s Profile</p>
+    <?php endif; ?>
+</div>
 
-if (empty($posts)): ?>
+<?php if (empty($posts)): ?>
     <div style="text-align: center;">
-        <p>You haven't created any posts yet.</p>
+        <?php if(isset($isOwnProfile) && $isOwnProfile): ?>
+            <p>You haven't created any posts yet.</p>
+        <?php else: ?>
+            <p>This user hasn't created any posts yet.</p>
+        <?php endif; ?>
     </div>
 <?php else: ?>
     <?php foreach($posts as $post): ?>
@@ -19,31 +31,20 @@ if (empty($posts)): ?>
                             <div class="user-avatar">
                                 <?php 
                                     $author = getUserByPost($pdo, $post['PostID']);
-                                    $avatar = htmlspecialchars($author['avatar'], ENT_QUOTES, 'UTF-8');
+                                    $postAvatar = htmlspecialchars($author['avatar'], ENT_QUOTES, 'UTF-8');
                                 ?>
-                                <img height="32px" src="/coursework/assets/images/random_pfp/<?= $avatar ?>" alt="User avatar">
+                                <img height="32px" src="/coursework/assets/images/random_pfp/<?= $postAvatar ?>" alt="User avatar">
                             </div>
                             <div class="user-info-details">
-                                <a href="#" class="user-name"><?= htmlspecialchars($post['username'], ENT_QUOTES, 'UTF-8') ?></a>
+                                <a href="/coursework/models/profile.php?user_id=<?= htmlspecialchars($post['UserID'], ENT_QUOTES, 'UTF-8') ?>" class="user-name"><?= htmlspecialchars($post['username'], ENT_QUOTES, 'UTF-8') ?></a>
                                 <span class="user-reputation">asked <?= timeAgo($post['createdAt']) ?></span>
                             </div>
                         </div>
                     </div>
                     
                     <div class="post-content post-preview">
-                        <?php 
-                        $content = strip_tags(htmlspecialchars($post['content'], ENT_QUOTES, 'UTF-8'));
-                        
-                        $lines = explode("\n", $content);
-                        
-                        $preview = array_slice($lines, 0, 2);
-                        $preview = implode("\n", $preview);
-                        
-                        if (count($lines) > 2 || strlen($content) > strlen($preview)) {
-                            $preview = trim($preview) . '...';
-                        }
-                        
-                        echo $preview;
+                        <?php
+                        echo trimLine(htmlspecialchars($post['content'], ENT_QUOTES, 'UTF-8'))
                         ?>
                     </div>                
 

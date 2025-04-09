@@ -16,7 +16,7 @@
                             <img height="32px" src="/coursework/assets/images/random_pfp/<?= $avatar ?>" alt="User avatar">
                         </div>
                         <div class="user-info-details">
-                            <a href="#" class="user-name"><?= htmlspecialchars($post['username'], ENT_QUOTES, 'UTF-8') ?></a>
+                            <a href="/coursework/models/profile.php?user_id=<?= htmlspecialchars($post['UserID'], ENT_QUOTES, 'UTF-8') ?>" class="user-name"><?= htmlspecialchars($post['username'], ENT_QUOTES, 'UTF-8') ?></a>
                             <span class="user-reputation">asked <?= timeAgo($post['createdAt']) ?></span>
                         </div>
                     </div>
@@ -52,9 +52,3 @@
         </div>
     </div>
 <?php endforeach; ?>
-
-<?php if (empty($posts)): ?>
-    <div class="post">
-        <div class="post-content">No posts found.</div>
-    </div>
-<?php endif; ?>

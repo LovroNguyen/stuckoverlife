@@ -63,7 +63,7 @@
         $query = query($pdo, 'SELECT * FROM posts WHERE PostID = :id', $parameters);
         return $query->fetch();
     }
-    
+
     function createPost($postTitle, $content, $userId, $moduleId) {
         global $pdo;
         // Begin transaction
@@ -320,6 +320,22 @@
         
         return false;
     }
+
+    function trimLine($content){
+        $contents = strip_tags($content);
+                    
+        $lines = explode("\n", $contents);
+        
+        $preview = array_slice($lines, 0, 2);
+        $preview = implode("\n", $preview);
+        
+        if (count($lines) > 2 || strlen($contents) > strlen($preview)) {
+            $preview = trim($preview) . '...';
+        }
+        
+        return $preview;
+    }
+
     // user FUNCTION ===================================================================================================
 
     function register($username, $password) {
@@ -401,6 +417,18 @@
         $parameters = [':userId' => $userId];
         $result = query($pdo, 'SELECT COUNT(*) as count FROM comment WHERE UserID = :userId', $parameters);
         return $result->fetch()['count'];
+    }
+
+    function getUserByUsername($pdo, $username) {
+        $parameters = [':username' => $username];
+        $query = query($pdo, 'SELECT * FROM user WHERE username = :username', $parameters);
+        return $query->fetch();
+    }
+    
+    function getUserById($pdo, $id) {
+        $parameters = [':id' => $id];
+        $query = query($pdo, 'SELECT * FROM user WHERE UserID = :id', $parameters);
+        return $query->fetch();
     }
     
     function formatDate($dateString) {
