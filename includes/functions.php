@@ -381,6 +381,34 @@
         return $query->fetch();
     }
 
+    function getPostByUser($pdo, $id) {
+        $parameters = [':id' => $id];
+        $query = query($pdo, 'SELECT p.*, u.username, m.moduleName FROM posts p   
+                              INNER JOIN user u ON p.UserID = u.UserID
+                              INNER JOIN modules m ON p.ModuleID = m.ModuleID
+                              WHERE u.UserID = :id
+                              ORDER BY p.createdAt DESC', $parameters);
+        return $query->fetchAll();
+    }
+
+    function getUserPostCount($pdo, $userId) {
+        $parameters = [':userId' => $userId];
+        $result = query($pdo, 'SELECT COUNT(*) as count FROM posts WHERE UserID = :userId', $parameters);
+        return $result->fetch()['count'];
+    }
+    
+    function getUserCommentCount($pdo, $userId) {
+        $parameters = [':userId' => $userId];
+        $result = query($pdo, 'SELECT COUNT(*) as count FROM comment WHERE UserID = :userId', $parameters);
+        return $result->fetch()['count'];
+    }
+    
+    function formatDate($dateString) {
+        if (empty($dateString)) return 'Unknown';
+        $date = new DateTime($dateString);
+        return $date->format('F j, Y');
+    }
+
     // module FUNCTION =================================================================================================
 
     function allModules($pdo){

@@ -7,14 +7,12 @@
     
     <form class="post-form">
         <div class="form-group">
-            <label for="email">Your email</label>
+            <label for="email">Your email (Optional)</label>
             <input 
                 type="text" 
                 id="email" 
                 name="email" 
                 class="form-control" 
-                required
-                autofocus
                 placeholder="Your email"
             >
         </div>
@@ -27,6 +25,7 @@
                 name="title" 
                 class="form-control" 
                 required
+                autofocus
                 placeholder="Enter at least 5 characters"
             >
         </div>

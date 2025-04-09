@@ -358,9 +358,9 @@ h1 {
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 1px 2px rgba(0,0,0,0.1);
-    margin-bottom: 16px;
     padding: 16px;
     border: 1px solid #e1e4e8;
+    margin-bottom: 16px;
 }
 
 .post-with-votes {
@@ -517,6 +517,10 @@ h1 {
 
 /* Comments styling */
 
+input {
+    font-family: inherit;
+}
+
 textarea {
     width: 100%;
     padding: 8px 16px;
@@ -525,6 +529,7 @@ textarea {
     font-size: 14px;
     resize: vertical;
     transition: .1s;
+    font-family: inherit;
 }
 
 .textarea:focus {
@@ -649,13 +654,6 @@ textarea {
     margin-top: 8px;
 }
 
-/* Fix for your existing layout */
-.main-content {
-    background-color: #f7f7f8;
-    border: none;
-    padding: 16px;
-}
-
 blockquote {
     border-left: none;
     padding: 0;
@@ -677,6 +675,37 @@ blockquote {
             padding: 20px;
         }
 
+        .main-content-welcome {
+            font-size: 27px;
+            font-weight: var(--base-text-weight-bold, 700);
+            margin-bottom: 16px;
+            display: flex;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .main-content-welcome span {
+            color: #636b74;
+            font-size: 13px;
+            font-weight: 400;
+        }
+
+        .main-content-welcome p {
+            line-height: 1.25;
+        }
+
+        .main-container-welcome-text {
+            display:grid;
+        }
+
+        .wave {
+            color: #92c2f2 !important;
+        }
+
+        .wave-opacity {
+            opacity: 0.2; /* Keep the opacity effect */
+        }
+
         .sidebar {
             width: 240px;
             margin-left: 24px;
@@ -687,11 +716,75 @@ blockquote {
                 border: 1px solid #dee0e1; 
                 border-radius: 8px; 
                 padding: 16px; 
-                margin-bottom: 16px;
                 min-width: 240px;
             }
 
-        /* Footer Styles */
+/* Profile Styles */
+
+            .profile-page .main-container {
+                flex-direction: row-reverse;
+            }
+            
+            .profile-page .sidebar {
+                margin-left: 0;
+                margin-right: 24px;
+            }
+
+            .profile-stats {
+                display: flex;
+                justify-content: space-around;
+                margin: 16px 0;
+            }
+            
+            .profile-avatar {
+                width: 205px;
+                border-radius: 8%;
+                background-color: #ffffff;
+                box-shadow: #0000001a 0px 1px 3px;
+                margin-bottom: 16px;
+            }
+
+            .profile-fullname {
+                font-size: 24px;
+                font-weight: var(--base-text-weight-bold, 600);
+                line-height: 1.25;
+                color: #242729;
+            }
+
+            .profile-username {
+                font-size: 20px;
+                font-style: normal;
+                font-weight: var(--base-text-weight-light, 300);
+                line-height: 24px;
+                color: #59636e;
+            }
+            
+            .stat-item {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            
+            .stat-value {
+                font-size: 20px;
+                font-weight: bold;
+                color: #0077cc;
+            }
+            
+            .stat-label {
+                font-size: 14px;
+                color: #6a737c;
+            }
+            
+            .member-since {
+                font-size: 14px;
+                color: #6a737c;
+                text-align: center;
+                margin-top: 10px;
+            }
+
+            /* Footer Styles */
         footer {
             background-color: #fff;
             border-top: 1px solid #dee0e1;
