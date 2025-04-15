@@ -9,41 +9,49 @@ try {
     
     $title = 'Help Center - Contact Us';
     $error = '';
+    $success = '';
+    
+    // Get current user
+    $userId = $_SESSION['user_id'];
+    $currentUser = getCurrentUser($pdo);
     
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save'])) {
         $email = trim($_POST['email']);
-        $title = trim($_POST['title']);
+        $feedbackTitle = trim($_POST['title']);
         $content = trim($_POST['content']);
         
+        // Use user's email from database if not provided
+        if (empty($email)) {
+            $email = null; // Store as NULL in database if not provided
+        }
+        
         // Validation
-        if (empty($email) || empty($content)) {
-            $error = 'All fields are required';
+        if (empty($feedbackTitle) || empty($content)) {
+            $error = 'Title and content are required';
         } else {
             try {
                 // Begin transaction
                 $pdo->beginTransaction();
                 
-                // Create post
-                // the message
-                $msg = "$content";
-
-                // use wordwrap() if lines are longer than 70 characters
-                $msg = wordwrap($msg,70);
-
-                // send email
-                mail("lovronguyen2@gmail.com",$title,$msg);
-                                
+                // Save feedback to database
+                saveFeedback($pdo, $feedbackTitle, $content, $email, $userId);
+                
                 $pdo->commit();
                 
-                // Redirect to index page after successful post creation
-                header('Location: index.php');
-                exit();
+                $success = 'Your feedback has been submitted. Thank you!';
+                
+                // Clear form after successful submission
+                $email = '';
+                $feedbackTitle = '';
+                $content = '';
             } catch (Exception $e) {
                 $pdo->rollBack();
-                $error = $e->getMessage();
+                $error = 'Error saving feedback: ' . $e->getMessage();
             }
         }
     }
+
+    $pageType = 'support-page';
 
     ob_start();
     include '../views/support.html.php';

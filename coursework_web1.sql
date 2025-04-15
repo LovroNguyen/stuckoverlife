@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 09, 2025 at 05:48 AM
+-- Generation Time: Apr 15, 2025 at 08:19 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -70,7 +70,28 @@ INSERT INTO `comment` (`CommentID`, `content`, `QuestionID`, `UserID`, `createdA
 (9, 'Any contribute are welcome!', 44, 2, '2025-03-25 14:35:36', '2025-03-25 14:35:36'),
 (15, '⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⢿⠿⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿\r\n⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⢟⣋⠥⠀⢐⠀⣓⡖⡮⠙⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿\r\n⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡏⢰⣫⡿⢳⡄⠐⠈⠟⠳⠇⠥⢻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿\r\n⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡟⠀⠈⠑⠈⠀⣀⠀⢀⠀⠀⢠⠠⠀⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿\r\n⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠁⢀⣀⡴⣾⠆⢹⣆⣤⠀⠀⡄⠀⠈⠈⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿\r\n⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣇⠀⠌⢻⠁⠀⠀⠀⢸⣣⠆⠀⡀⢐⢘⢦⡘⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿\r\n⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⡄⠀⣤⣠⣤⣾⡟⣧⠀⠀⢷⣢⠞⠂⠉⠈⠉⠙⢻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿\r\n⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠀⠏⠛⠀⢈⠪⣅⠀⠀⠈⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿\r\n⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣧⠀⣀⠠⠊⠆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠛⠿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿\r\n⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣧⠙⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠻⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿\r\n⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠿⠿⠿⠿⣿⣿⣿⣿⣿⣿⡿⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿\r\n⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟⠛⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠙⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⠙⠛⠿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿\r\n⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿\r\n⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⢻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿\r\n⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿\r\n⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿\r\n⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿\r\n⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿\r\n⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠰⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿\r\n⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀⠀⢀⣀⣀⣀⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣀⡀⠀⠸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿\r\n⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⢠⢴⣶⣿⣿⣿⡿⢟⣛⢿⣦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⢠⣲⢏⣿⢿⣿⣷⣄⠹⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿\r\n⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⣛⡭⣾⣷⡹⢟⣯⣷⣿⣿⣿⣷⢹⣿⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣌⣶⣿⣿⢚⣼⣷⡝⡎⣮⠀⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿\r\n⣿⣿⣿⣿⣿⣿⣿⣿⡿⣫⣵⣿⡟⣼⣿⣿⢿⣯⢿⣿⣿⣿⣿⣳⣎⡿⡿⣄⠀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡀⣾⣿⢸⣿⣿⣇⢸⣿⡿⠿⢦⣟⢰⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿\r\n⣿⣿⣿⣿⣿⣿⣿⣫⠾⡻⣻⢏⣾⡿⣫⣾⡏⣿⣯⣟⣿⢿⡁⣿⢣⡞⢟⣥⣾⣿⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣤⣾⣷⠹⡏⣾⡼⣿⣿⡉⣷⣿⣿⢿⡇⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿\r\n⣿⣿⣿⣿⣿⣿⢯⢟⡶⣵⢯⣾⢟⣵⣿⣿⢃⢿⣿⣿⠿⣚⢡⣏⡞⣡⣾⣿⣿⣿⣷⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣤⣾⣿⣿⣿⠆⣱⣿⣇⣿⣿⡁⣻⣿⣿⢸⣇⢹⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿\r\n⣿⣿⣿⣿⣿⡟⣺⢏⡾⣳⢟⣵⣿⣿⣿⡏⣿⣿⣶⡿⠟⣩⢞⡾⣹⣿⣿⣿⣿⣿⣿⡿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⣿⣿⣿⣿⣿⢏⣼⣿⣿⣷⠋⣿⣸⡕⣯⡷⠸⢸⠈⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿\r\n⣿⣿⣿⣿⡿⢳⣧⡿⡵⣳⣿⣿⣿⣿⣿⢇⡾⣛⣩⣶⡿⣫⣾⢧⣿⣿⣿⣿⣿⣿⣿⡟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⣿⣿⣿⣿⣿⡏⢸⣿⣿⣿⢣⢯⣿⣷⡜⣶⢟⡌⣸⠃⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿\r\n⣿⣿⣿⣿⡿⣸⡟⡜⣼⣿⣿⣿⣿⠟⢕⣯⣾⣿⡿⣛⣵⣿⠟⣾⣿⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠐⠿⠿⠿⣿⣿⣿⣿⡃⢸⣿⣿⢏⣿⢸⣿⣿⢇⢣⡿⢠⣿⢠⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿\r\n⣿⣿⣿⣿⡇⡾⡙⣼⣿⣿⣿⡿⢋⣴⣿⣿⣛⡵⠾⠛⠛⠉⠀⠉⠉⠉⠙⠛⠛⠿⢿⡿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠙⠷⢠⣻⡟⣾⡏⣾⣿⡟⣰⣿⢃⣾⢇⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿\r\n⣿⣿⣿⣿⢇⣣⢱⣿⣿⡿⢋⣴⡿⠛⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠙⠳⢿⣯⣽⣿⢧⣿⢡⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿\r\n⣿⣿⣿⠋⠀⠙⣿⡿⣵⡴⠛⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠛⢯⢏⣵⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿\r\n⣿⣿⠃⠀⠀⠀⠈⠓⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠹⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⢿⣿⣋\r\n⣿⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢄⠡⣔⡡⢌⠀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⠟⣛⣫⣭⢶⡶⣟⣯⢷⣻\r\n⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠌⢢⣟⡾⣽⡎⢆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠄⣂⠰⡀⠄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠿⢟⣛⣭⡵⣶⣻⣟⡿⣽⣞⣯⢿⡽⣞⣯⢿\r\n⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢈⠒⠼⣛⠷⣙⠂⠄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⡔⣎⢷⡱⢈⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠻⣿⣿⣿⣿⣿⣿⣿⣿⡿⠿⣛⣻⡭⣷⢶⣟⣯⣟⡾⣽⣳⣟⡾⣽⣳⣟⡾⣯⢿⡽⣞⣿\r\n⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠀⡁⠊⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠁⡘⢌⠣⡙⠠⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⣿⣿⣿⠿⣛⣭⣴⡶⣿⢯⣷⣻⣽⣻⣞⡷⣯⣟⣷⣻⢾⣽⣳⣟⡾⣽⢯⣟⣽⣻⢾\r\n⣿⣦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠂⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢘⣫⡽⣶⣻⢯⡷⣯⢿⣽⣻⣞⡷⣯⢷⡯⣟⣷⣻⢾⡽⣻⣞⡷⢯⡿⣽⣻⣞⡷⣯⢿\r\n⣿⣿⣧⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣤⣾⡟⣷⢯⣟⣯⢿⣽⣻⣞⡷⣯⢿⣽⣳⢿⡽⣞⡷⣯⣟⡷⣯⣟⣯⣟⣷⣻⢾⡽⣯⢿\r\n⣿⣿⣿⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⣳⣟⡾⣽⣻⢾⣽⣻⣞⣧⢿⡽⣞⡿⣮⣟⣯⡽⣯⣽⢾⡽⣞⣷⣻⢾⡽⣾⡽⣯⢿⣽⣻\r\n⣿⣿⣿⣿⣧⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣾⣟⣾⣳⢯⣟⡷⣯⣟⡾⢧⣟⡾⣯⢿⡽⣽⣳⣟⡾⣽⣳⢯⡿⣽⠻⠾⠝⣋⣛⡥⠍⣈⣿⢾⣽\r\n⣿⣿⣿⣿⣿⣿⣿⣶⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣤⣶⣷⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣾⣻⢷⣻⢾⣽⣻⢾⣽⣳⢯⣟⡿⣾⡽⣯⢿⡽⠳⠟⣞⣙⣃⣭⣭⣷⣶⠾⠿⢿⣛⣭⢶⣟⣯⣟⡿⣞\r\n⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣤⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣴⣾⣿⣿⣿⣿⠛⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣤⣾⣻⠷⣯⣟⢯⣟⣯⢾⣽⣻⢾⣽⣻⢾⣽⠳⢛⣩⣥⣶⣿⣿⠿⢟⣛⣭⡽⣶⣞⣿⣻⢯⡷⣯⣟⠾⠓⣋⣛⣭\r\n⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣶⣶⣤⣦⣤⣤⣤⣤⣄⣀⣀⣀⣀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⣿⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣴⣾⣷⠶⣂⣸⢯⣟⡷⣯⣟⡾⣽⣻⢾⠽⢻⣚⣩⣥⣶⡿⠿⣛⣯⣭⡶⣞⣿⣻⡽⣾⣽⣳⡟⠾⣝⣋⣭⣵⣶⣿⣿⣿⣿⣿\r\n⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣽⣿⣿⣿⡃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢈⣭⡷⣞⣯⢿⣽⣻⢾⡽⠓⣋⣫⣥⣵⣶⡾⠿⣛⣫⣭⣶⢾⡿⣽⣞⣷⣻⡽⣞⠷⣛⣃⣭⣴⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿\r\n⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣾⣿⣿⣿⣿⣷⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⠿⠽⢛⣚⣭⣬⣴⣶⣿⣿⣿⠿⣛⣫⣵⣶⢿⣻⢷⣻⣞⣯⡟⠷⢛⣪⣥⣶⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿\r\n⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣾⣿⣿⣿⣿⣿⠿⢷⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠰⣾⣿⣿⣿⣿⣿⡿⢟⣫⣥⣾⣻⣽⣻⢾⡽⣯⡟⠯⣓⣩⣴⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿\r\n⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡼⠿⢿⣛⣋⣭⣵⡶⣿⠻⠧⢂⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢹⣿⡿⢟⣫⣵⢾⣻⢷⣻⣞⡷⡯⠟⣋⣥⣶⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿\r\n⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠿⠛⠛⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣞⣿⣻⠟⢯⣛⣩⣬⣴⣶⣿⣿⣿⣿⣦⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠐⠾⠟⣿⣞⣯⣟⣯⢷⡯⠿⣁⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿\r\n⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣛⣩⣴⣶⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⢓⣋⣬⣵⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿\r\n⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣇⣀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣯⣥⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿\r\n⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣶⣶⣶⣶⣶⣶⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⢶⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿', 39, 2, '2025-03-25 15:31:57', '2025-03-25 15:31:57'),
 (16, 'asdfasdfsadfasdf testt testes test test1 test2', 40, 4, '2025-03-26 13:38:01', '2025-03-26 13:47:39'),
-(18, 'testttt', 3, 1, '2025-04-01 11:12:06', '2025-04-01 11:12:06');
+(18, 'testttt', 3, 1, '2025-04-01 11:12:06', '2025-04-01 11:12:06'),
+(20, 'omg omg', 3, 9, '2025-04-09 13:02:27', '2025-04-09 13:02:27'),
+(23, 'woaaaa', 46, 9, '2025-04-09 13:06:05', '2025-04-09 13:06:05'),
+(24, 'holysh!t\r\n', 40, 9, '2025-04-09 13:06:17', '2025-04-09 13:06:17'),
+(25, 'lmao omg', 42, 9, '2025-04-09 13:06:34', '2025-04-09 13:06:34'),
+(26, 'woooooooooooooooooooooooa', 41, 9, '2025-04-09 13:06:44', '2025-04-09 13:06:44'),
+(27, 'lol', 44, 9, '2025-04-09 13:06:50', '2025-04-09 13:06:50');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `feedback`
+--
+
+CREATE TABLE `feedback` (
+  `feedbackID` int(11) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `content` text NOT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `createdAt` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `UserID` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -118,14 +139,14 @@ CREATE TABLE `posts` (
 --
 
 INSERT INTO `posts` (`PostID`, `title`, `content`, `ModuleID`, `UserID`, `createdAt`, `updatedAt`, `AssetID`, `viewCount`, `voteCount`) VALUES
-(3, 'test1', 'test1again', 1, 1, '2025-03-26 11:23:58', '2025-04-03 14:40:57', NULL, 57, 0),
-(39, 'Understanding SQL Indexes', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur porttitor vestibulum elit ut condimentum. Maecenas mollis orci vitae nunc interdum, eget posuere elit interdum. Interdum et malesuada fames ac ante ipsum primis in faucibus. Mauris ut ex elit. Cras in vehicula justo. In est dolor, sodales non tempus nec, suscipit ut odio. Proin eget leo nulla. Pellentesque ultricies interdum felis et convallis. Mauris vel sodales dolor, id ullamcorper mi. Donec venenatis sem non lorem porta rutrum. Nam euismod mauris turpis, ut commodo lacus ultrices sit amet. In hac habitasse platea dictumst. Nam erat nisi, semper sit amet pharetra nec, egestas et nisi. Nunc viverra nulla eget tellus posuere mattis. Aenean consequat sem purus, id hendrerit ante porttitor eget. Quisque eu ante at ipsum egestas rutrum vitae ac odio.\r\n\r\nQuisque ipsum mi, tempus vitae elit ut, pharetra fermentum augue. Mauris consectetur fermentum quam, vitae bibendum sem. Vestibulum placerat leo sit amet tortor ornare, non luctus eros bibendum. Suspendisse fringilla ullamcorper justo. Etiam interdum lacinia fermentum. Maecenas commodo euismod imperdiet. Nulla nec semper eros. Nunc a tempor ante. Nam ac posuere enim. Nulla ut tempus odio, quis ornare justo. Mauris vulputate pharetra ipsum non congue. Proin dapibus, tellus at porta mattis, ipsum mi sagittis quam, vel ultrices sem tellus non dolor. Ut scelerisque laoreet nunc ac sollicitudin. Vivamus vitae justo diam. Nulla facilisi. Nunc commodo dignissim massa in dictum.', 1, 5, '2025-03-14 16:52:22', '2025-04-01 18:49:02', NULL, 46, 3),
-(40, 'Introduction to Machine Learning', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce quis nisl suscipit, posuere tortor nec, luctus felis. Sed ultrices nisi quis erat tristique porta. Fusce placerat interdum lorem, tincidunt efficitur diam suscipit a. Ut vitae mollis quam. Cras tincidunt eros sed fringilla rutrum. Phasellus varius, mauris a ultricies posuere, velit dolor dapibus sem, sollicitudin lacinia tortor arcu vel augue. Praesent eleifend posuere augue, ut porta massa malesuada nec. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nullam et libero in velit finibus lobortis. Duis nulla justo, imperdiet eget consectetur in, ornare laoreet est. Phasellus magna nisl, blandit et rutrum ut, tempor eget est. Pellentesque interdum urna lacus, sed venenatis felis pharetra in. Sed tempus ipsum vitae sapien viverra, et posuere neque posuere. Donec blandit, est et ultricies semper, turpis ante dictum mauris, eget scelerisque justo ante sed sem. Integer sit amet luctus nulla. In cursus volutpat risus quis dignissim.', 1, 3, '2025-03-14 16:52:22', '2025-04-01 14:43:01', NULL, 80, 10),
-(41, 'Best Practices in Web Security', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin elementum consectetur mollis. Maecenas est est, convallis in eros vel, egestas cursus sapien. Sed congue maximus blandit. Duis placerat at nulla nec volutpat. Sed id libero ac dolor euismod varius. Sed molestie feugiat augue, eu auctor quam aliquet finibus. Aliquam tempor eget nunc et luctus. Sed dapibus, sapien non auctor interdum, risus dolor ultricies sapien, suscipit cursus turpis mi ut erat. Morbi sapien libero, placerat vitae urna sed, mollis vestibulum mauris. Cras lobortis enim vel leo tristique, a euismod eros rutrum. In eleifend ipsum vitae nunc dignissim, ac aliquet dui sollicitudin. Morbi efficitur risus quis venenatis tempus.\r\n\r\n', 1, 4, '2025-03-14 16:52:22', '2025-03-26 13:41:39', NULL, 126, 25),
-(42, 'Database Optimization Tips', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi in facilisis dui, id feugiat lectus. Nulla rutrum sapien et massa eleifend, faucibus ullamcorper mauris pharetra. Nam finibus risus et dictum venenatis. Quisque imperdiet pellentesque viverra. Cras luctus dignissim rutrum. Donec semper neque ac purus auctor auctor. Pellentesque bibendum odio metus, vitae tincidunt nisi pretium et. Quisque scelerisque eros id faucibus lacinia.', 1, 3, '2025-03-14 16:52:22', '2025-04-01 14:43:06', NULL, 17, 0),
+(3, 'test1', 'test1again', 1, 1, '2025-03-26 11:23:58', '2025-04-09 22:58:43', NULL, 70, 0),
+(39, 'Understanding SQL Indexes', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur porttitor vestibulum elit ut condimentum. Maecenas mollis orci vitae nunc interdum, eget posuere elit interdum. Interdum et malesuada fames ac ante ipsum primis in faucibus. Mauris ut ex elit. Cras in vehicula justo. In est dolor, sodales non tempus nec, suscipit ut odio. Proin eget leo nulla. Pellentesque ultricies interdum felis et convallis. Mauris vel sodales dolor, id ullamcorper mi. Donec venenatis sem non lorem porta rutrum. Nam euismod mauris turpis, ut commodo lacus ultrices sit amet. In hac habitasse platea dictumst. Nam erat nisi, semper sit amet pharetra nec, egestas et nisi. Nunc viverra nulla eget tellus posuere mattis. Aenean consequat sem purus, id hendrerit ante porttitor eget. Quisque eu ante at ipsum egestas rutrum vitae ac odio.\r\n\r\nQuisque ipsum mi, tempus vitae elit ut, pharetra fermentum augue. Mauris consectetur fermentum quam, vitae bibendum sem. Vestibulum placerat leo sit amet tortor ornare, non luctus eros bibendum. Suspendisse fringilla ullamcorper justo. Etiam interdum lacinia fermentum. Maecenas commodo euismod imperdiet. Nulla nec semper eros. Nunc a tempor ante. Nam ac posuere enim. Nulla ut tempus odio, quis ornare justo. Mauris vulputate pharetra ipsum non congue. Proin dapibus, tellus at porta mattis, ipsum mi sagittis quam, vel ultrices sem tellus non dolor. Ut scelerisque laoreet nunc ac sollicitudin. Vivamus vitae justo diam. Nulla facilisi. Nunc commodo dignissim massa in dictum.', 1, 5, '2025-03-14 16:52:22', '2025-04-09 22:59:06', NULL, 51, 3),
+(40, 'Introduction to Machine Learning', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce quis nisl suscipit, posuere tortor nec, luctus felis. Sed ultrices nisi quis erat tristique porta. Fusce placerat interdum lorem, tincidunt efficitur diam suscipit a. Ut vitae mollis quam. Cras tincidunt eros sed fringilla rutrum. Phasellus varius, mauris a ultricies posuere, velit dolor dapibus sem, sollicitudin lacinia tortor arcu vel augue. Praesent eleifend posuere augue, ut porta massa malesuada nec. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nullam et libero in velit finibus lobortis. Duis nulla justo, imperdiet eget consectetur in, ornare laoreet est. Phasellus magna nisl, blandit et rutrum ut, tempor eget est. Pellentesque interdum urna lacus, sed venenatis felis pharetra in. Sed tempus ipsum vitae sapien viverra, et posuere neque posuere. Donec blandit, est et ultricies semper, turpis ante dictum mauris, eget scelerisque justo ante sed sem. Integer sit amet luctus nulla. In cursus volutpat risus quis dignissim.', 1, 3, '2025-03-14 16:52:22', '2025-04-09 22:40:37', NULL, 86, 10),
+(41, 'Best Practices in Web Security', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin elementum consectetur mollis. Maecenas est est, convallis in eros vel, egestas cursus sapien. Sed congue maximus blandit. Duis placerat at nulla nec volutpat. Sed id libero ac dolor euismod varius. Sed molestie feugiat augue, eu auctor quam aliquet finibus. Aliquam tempor eget nunc et luctus. Sed dapibus, sapien non auctor interdum, risus dolor ultricies sapien, suscipit cursus turpis mi ut erat. Morbi sapien libero, placerat vitae urna sed, mollis vestibulum mauris. Cras lobortis enim vel leo tristique, a euismod eros rutrum. In eleifend ipsum vitae nunc dignissim, ac aliquet dui sollicitudin. Morbi efficitur risus quis venenatis tempus.\r\n\r\n', 1, 4, '2025-03-14 16:52:22', '2025-04-15 13:08:58', NULL, 129, 25),
+(42, 'Database Optimization Tips', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi in facilisis dui, id feugiat lectus. Nulla rutrum sapien et massa eleifend, faucibus ullamcorper mauris pharetra. Nam finibus risus et dictum venenatis. Quisque imperdiet pellentesque viverra. Cras luctus dignissim rutrum. Donec semper neque ac purus auctor auctor. Pellentesque bibendum odio metus, vitae tincidunt nisi pretium et. Quisque scelerisque eros id faucibus lacinia.', 1, 3, '2025-03-14 16:52:22', '2025-04-09 13:06:37', NULL, 20, 0),
 (43, 'How to Use ENUM in MySQL', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas condimentum lacus justo, et tristique nibh suscipit quis. Morbi efficitur sodales eleifend. In hac habitasse platea dictumst. Curabitur ornare ultrices odio vitae maximus. Ut nec posuere diam. Vivamus in finibus augue, sit amet rutrum sapien. In quis fringilla lacus. Etiam malesuada pretium metus. Cras ornare, enim nec posuere laoreet, turpis dui tempor leo, vel consequat erat augue ac lacus. Phasellus varius ac metus ut sagittis. Aenean non condimentum urna, quis scelerisque mauris. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vivamus maximus ipsum sit amet nulla interdum ornare. Nam sit amet massa quis turpis sagittis accumsan. Sed in dignissim nisi.', 1, 5, '2025-03-14 16:52:22', '2025-03-20 20:39:14', NULL, 86, 15),
-(44, 'My first post!!', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ornare lacus lacus, eu egestas metus vestibulum et. Integer sit amet aliquet urna. Nunc eget viverra orci. Fusce et ultricies nisi. Aliquam ut congue tortor, vitae consectetur velit. Sed gravida, dolor id ultricies vehicula, orci sem pharetra massa, quis aliquet purus dolor id neque. Duis facilisis vehicula tellus. Pellentesque facilisis velit eget mauris porta vehicula. Mauris a sapien mattis, semper quam in, tempus mauris. In hac habitasse platea dictumst. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Suspendisse porta est sed sem hendrerit bibendum.', 1, 2, '2025-03-20 14:49:21', '2025-04-01 11:12:00', 1, 64, 0),
-(46, 'Testing new Create Post Function', 'just testing, nothing much.', 1, 1, '2025-04-01 14:18:07', '2025-04-09 10:21:17', NULL, 7, 0);
+(44, 'My first post!!', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ornare lacus lacus, eu egestas metus vestibulum et. Integer sit amet aliquet urna. Nunc eget viverra orci. Fusce et ultricies nisi. Aliquam ut congue tortor, vitae consectetur velit. Sed gravida, dolor id ultricies vehicula, orci sem pharetra massa, quis aliquet purus dolor id neque. Duis facilisis vehicula tellus. Pellentesque facilisis velit eget mauris porta vehicula. Mauris a sapien mattis, semper quam in, tempus mauris. In hac habitasse platea dictumst. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Suspendisse porta est sed sem hendrerit bibendum.', 1, 2, '2025-03-20 14:49:21', '2025-04-09 13:06:50', 1, 66, 0),
+(46, 'Testing new Create Post Function', 'just testing, nothing much.', 1, 1, '2025-04-01 14:18:07', '2025-04-15 13:09:05', NULL, 14, 0);
 
 -- --------------------------------------------------------
 
@@ -191,14 +212,13 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`UserID`, `username`, `firstname`, `lastname`, `password`, `avatar`, `dob`, `bio`, `status`, `role`, `createdAt`) VALUES
-(1, 'lxvroo', '0', '1', '$2y$10$K4LkiPBiH6/nSB3VdVWiEOqTXkiBQ2YFEClAn8AnkW7ENGdNTnD02', 'identicon-1741795713182.png', NULL, NULL, 'Active', 'admin', '2025-03-03 12:53:25'),
+(1, 'lxvroo', 'l̷̹͐͗͊x̷͔̬̘̂͐͌̀v̵͇̂́͒̈́r̸̺̙͆o̶͖͊̅͝o̷̧̞̿͘', '', '$2y$10$K4LkiPBiH6/nSB3VdVWiEOqTXkiBQ2YFEClAn8AnkW7ENGdNTnD02', 'identicon-1741795713182.png', NULL, NULL, 'Active', 'admin', '2025-03-03 12:53:25'),
 (2, 'nɒʜИ', 'nɘγυϱИ', 'nɒʜИ', '$2y$10$K4LkiPBiH6/nSB3VdVWiEOqTXkiBQ2YFEClAn8AnkW7ENGdNTnD02', 'identicon-1741795726242.png', NULL, NULL, 'Active', 'user', '2025-03-18 15:01:38'),
 (3, 'human', 'nguyen', 'people', '$2y$10$K4LkiPBiH6/nSB3VdVWiEOqTXkiBQ2YFEClAn8AnkW7ENGdNTnD02', 'identicon-1741795711113.png', NULL, NULL, 'Active', 'user', '2025-03-19 11:28:12'),
 (4, 'Nhân', 'Nguyn', 'Nhaan', '$2y$10$K4LkiPBiH6/nSB3VdVWiEOqTXkiBQ2YFEClAn8AnkW7ENGdNTnD02', 'identicon-1741795708792.png', NULL, NULL, 'Active', 'user', '2025-03-19 11:32:11'),
 (5, 'nhan', 'Ngyn', 'nhan', '$2y$10$K4LkiPBiH6/nSB3VdVWiEOqTXkiBQ2YFEClAn8AnkW7ENGdNTnD02', 'identicon-1741795697173.png', NULL, NULL, 'Active', 'user', '2025-03-20 16:15:22'),
 (6, 'teo`', 'Teo', 'Huynh Ba', '$2y$10$Jch8keQzVs6LTXFSwYoc7OgxlV2ZYhMR5pywbhe7mnpt.zUlwUvDu', 'identicon-1741795715301.png', NULL, NULL, 'Active', 'user', '2025-04-01 14:23:09'),
-(9, 'theo?', 'Theo', 'Vu Thanh', '$2y$10$k1uRV1ko.XBbbN8H2dUc7eJZ/8UJob4FXQF/n5ev.tm6zVzucGBjK', 'identicon-1741795731730.png', NULL, NULL, 'Active', 'user', '2025-04-01 14:56:56'),
-(10, 'Nhân', 'Ngyun', 'Nhaan', '$2y$10$K4LkiPBiH6/nSB3VdVWiEOqTXkiBQ2YFEClAn8AnkW7ENGdNTnD02', 'identicon-1741795708792.png', NULL, NULL, 'Active', 'user', '2025-03-19 11:32:11');
+(9, 'theo?', 'Theo', 'Vu Thanh', '$2y$10$k1uRV1ko.XBbbN8H2dUc7eJZ/8UJob4FXQF/n5ev.tm6zVzucGBjK', 'identicon-1741795731730.png', NULL, NULL, 'Active', 'user', '2025-04-01 14:56:56');
 
 --
 -- Triggers `user`
@@ -243,6 +263,13 @@ ALTER TABLE `comment`
   ADD KEY `UserID` (`UserID`);
 
 --
+-- Indexes for table `feedback`
+--
+ALTER TABLE `feedback`
+  ADD PRIMARY KEY (`feedbackID`),
+  ADD KEY `UserID` (`UserID`) USING BTREE;
+
+--
 -- Indexes for table `modules`
 --
 ALTER TABLE `modules`
@@ -284,7 +311,13 @@ ALTER TABLE `asset`
 -- AUTO_INCREMENT for table `comment`
 --
 ALTER TABLE `comment`
-  MODIFY `CommentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `CommentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+
+--
+-- AUTO_INCREMENT for table `feedback`
+--
+ALTER TABLE `feedback`
+  MODIFY `feedbackID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `modules`
@@ -327,6 +360,12 @@ ALTER TABLE `asset`
 ALTER TABLE `comment`
   ADD CONSTRAINT `comment_ibfk_1` FOREIGN KEY (`QuestionID`) REFERENCES `posts` (`PostID`) ON DELETE CASCADE,
   ADD CONSTRAINT `comment_ibfk_3` FOREIGN KEY (`UserID`) REFERENCES `user` (`UserID`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `feedback`
+--
+ALTER TABLE `feedback`
+  ADD CONSTRAINT `feedback_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `user` (`UserID`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `posts`

@@ -5,15 +5,20 @@
         <div class="form-error"><?= htmlspecialchars($error, ENT_QUOTES, 'UTF-8') ?></div>
     <?php endif; ?>
     
-    <form class="post-form">
+    <?php if (isset($success) && !empty($success)): ?>
+        <div class="form-success"><?= htmlspecialchars($success, ENT_QUOTES, 'UTF-8') ?></div>
+    <?php endif; ?>
+    
+    <form class="post-form" method="post" action="">
         <div class="form-group">
             <label for="email">Your email (Optional)</label>
             <input 
-                type="text" 
+                type="email" 
                 id="email" 
                 name="email" 
                 class="form-control" 
                 placeholder="Your email"
+                value="<?= isset($email) ? htmlspecialchars($email, ENT_QUOTES, 'UTF-8') : '' ?>"
             >
         </div>
 
@@ -27,6 +32,7 @@
                 required
                 autofocus
                 placeholder="Enter at least 5 characters"
+                value="<?= isset($feedbackTitle) ? htmlspecialchars($feedbackTitle, ENT_QUOTES, 'UTF-8') : '' ?>"
             >
         </div>
         
@@ -38,7 +44,7 @@
                 class="form-control" 
                 required
                 placeholder="Enter at least 15 characters"
-            ></textarea>
+            ><?= isset($content) ? htmlspecialchars($content, ENT_QUOTES, 'UTF-8') : '' ?></textarea>
         </div>
         
         <div class="form-actions">

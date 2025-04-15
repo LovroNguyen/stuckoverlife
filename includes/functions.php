@@ -444,6 +444,59 @@
         return $Modules->fetchAll();
     }
 
+    // feedback FUNCTION ================================================================================================
+
+    function saveFeedback($pdo, $title, $content, $email, $userId) {
+        $query = 'INSERT INTO feedback (title, content, email, createdAt, UserID) 
+                 VALUES (:title, :content, :email, NOW(), :userId)';
+        $parameters = [
+            ':title' => $title,
+            ':content' => $content, 
+            ':email' => $email,
+            ':userId' => $userId
+        ];
+        
+        return query($pdo, $query, $parameters);
+    }
+    
+    function getUserFeedback($pdo, $userId) {
+        $parameters = [':userId' => $userId];
+        $query = query($pdo, 'SELECT * FROM feedback WHERE UserID = :userId ORDER BY createdAt DESC', $parameters);
+        return $query->fetchAll();
+    }
+
+    function getAllFeedback($pdo) {
+        $query = query($pdo, 'SELECT f.*, u.username FROM feedback f 
+                             INNER JOIN user u ON f.UserID = u.UserID 
+                             ORDER BY f.createdAt DESC');
+        return $query->fetchAll();
+    }
+
+    function deleteFeedback($pdo, $feedbackId) {
+        $parameters = [':feedbackId' => $feedbackId];
+        return query($pdo, 'DELETE FROM feedback WHERE feedbackID = :feedbackId', $parameters);
+    }
+    
+    function markFeedbackResolved($pdo, $feedbackId) {
+        // Check if status column exists in feedback table
+        try {
+            // First check if column exists
+            $result = $pdo->query("SHOW COLUMNS FROM feedback LIKE 'status'");
+            
+            if ($result->rowCount() == 0) {
+                // Add status column if it doesn't exist
+                $pdo->exec("ALTER TABLE feedback ADD COLUMN status VARCHAR(20) DEFAULT 'open'");
+            }
+            
+            // Mark as resolved
+            $parameters = [':feedbackId' => $feedbackId];
+            return query($pdo, "UPDATE feedback SET status = 'resolved' WHERE feedbackID = :feedbackId", $parameters);
+        } catch (Exception $e) {
+            error_log('Error marking feedback as resolved: ' . $e->getMessage());
+            throw new Exception('Unable to mark feedback as resolved');
+        }
+    }
+
     // session FUNCTION ================================================================================================
 
     function isLoggedIn() {
