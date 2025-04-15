@@ -27,7 +27,7 @@ try {
         
         // Validation
         if (empty($feedbackTitle) || empty($content)) {
-            $error = 'Title and content are required';
+            $_SESSION['error'] = 'Title and content are required';
         } else {
             try {
                 // Begin transaction
@@ -38,7 +38,7 @@ try {
                 
                 $pdo->commit();
                 
-                $success = 'Your feedback has been submitted. Thank you!';
+                $_SESSION['success'] = 'Feedback successfully sumitted!';
                 
                 // Clear form after successful submission
                 $email = '';

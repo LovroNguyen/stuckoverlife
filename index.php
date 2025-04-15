@@ -7,7 +7,13 @@ error_log('Index.php - Session check: ' . (isset($_SESSION['user_id']) ? 'User I
         include './includes/db.php';
         include './includes/functions.php';
 
-        $posts = allPosts($pdo);
+        // In index.php, replace the current posts retrieval with:
+        if (isset($_GET['search']) && !empty($_GET['search'])) {
+            $searchTerm = trim($_GET['search']);
+            $posts = search($pdo, $searchTerm);
+        } else {
+            $posts = allPosts($pdo);
+        }
         $title = 'Stuck Overlife';
         
         ob_start();

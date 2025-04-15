@@ -336,6 +336,26 @@
         return $preview;
     }
 
+    function search($pdo, $searchTerm) {
+        // Prepare search term for use in LIKE clause
+        $searchParam = '%' . $searchTerm . '%';
+        $parameters = [':search' => $searchParam];
+        
+        // Query posts matching search term in title or content
+        $query = query($pdo, 
+            'SELECT p.*, u.username, m.moduleName 
+            FROM posts p
+            INNER JOIN user u ON p.UserID = u.UserID
+            INNER JOIN modules m ON p.ModuleID = m.ModuleID
+            WHERE p.title LIKE :search 
+            OR p.content LIKE :search
+            ORDER BY p.createdAt DESC', 
+            $parameters
+        );
+        
+        return $query->fetchAll();
+    }
+
     // user FUNCTION ===================================================================================================
 
     function register($username, $password) {

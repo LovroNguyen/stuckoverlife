@@ -20,11 +20,15 @@
             <input type="hidden" name="action" value="view">
             <input type="text" name="search" placeholder="Search feedback..." 
                    value="<?= isset($_GET['search']) ? htmlspecialchars($_GET['search'], ENT_QUOTES, 'UTF-8') : '' ?>">
-            <button type="submit" class="search-button">Search</button>
-            <?php if (isset($_GET['search']) && !empty($_GET['search'])): ?>
-                <a href="/coursework/controllers/feedbackController.php" class="clear-search">Clear</a>
-            <?php endif; ?>
+                   <button type="submit" class="search-icon">
+                        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 18 18">
+                            <path d="M18 16.5l-5.14-5.18h-.35a7 7 0 1 0-1.19 1.19v.35L16.5 18l1.5-1.5zM12 7A5 5 0 1 1 2 7a5 5 0 0 1 10 0z" fill="currentColor"></path>
+                        </svg>
+                    </button>
         </form>
+        <?php if (isset($_GET['search']) && !empty($_GET['search'])): ?>
+                <a href="/coursework/controllers/feedbackController.php" class="clear-search">Clear</a>
+        <?php endif; ?>
     </div>
     
     <?php if (empty($feedbackList)): ?>
