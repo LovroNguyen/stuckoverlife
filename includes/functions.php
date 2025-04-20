@@ -457,6 +457,191 @@
         return $date->format('F j, Y');
     }
 
+    // admin FUNCTION ===================================================================================================
+    
+    function addUser($pdo, $username, $password, $firstname = '', $lastname = '', $email = '', $role = 'user') {
+        // Check if username already exists
+        $params = [':username' => $username];
+        $checkUser = query($pdo, 'SELECT * FROM user WHERE username = :username', $params);
+            
+        if ($checkUser->rowCount() > 0) {
+            throw new Exception('Username already exists');
+        }
+        
+        // Hash password
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+        
+        // Generate random avatar
+        $avatarFilename = 'identicon-' . rand(1000000000000, 9999999999999) . '.png';
+        
+        // Create user
+        $query = 'INSERT INTO user (username, firstname, lastname, password, avatar, role, createdAt) 
+                  VALUES (:username, :firstname, :lastname, :password, :avatar, :role, NOW())';
+        $params = [
+            ':username' => $username,
+            ':firstname' => $firstname,
+            ':lastname' => $lastname,
+            ':password' => $hashedPassword,
+            ':avatar' => $avatarFilename,
+            ':role' => $role
+        ];
+        
+        return query($pdo, $query, $params);
+    }
+    
+    function updateUser($pdo, $userId, $username, $firstname = '', $lastname = '', $email = '', $role = 'user', $password = null) {
+        // Check if username already exists and belongs to another user
+        $params = [':username' => $username, ':userId' => $userId];
+        $checkUser = query($pdo, 'SELECT * FROM user WHERE username = :username AND UserID != :userId', $params);
+            
+        if ($checkUser->rowCount() > 0) {
+            throw new Exception('Username already exists');
+        }
+        
+        // Base query without password
+        $query = 'UPDATE user SET 
+                  username = :username, 
+                  firstname = :firstname, 
+                  lastname = :lastname, 
+                  role = :role 
+                  WHERE UserID = :userId';
+        
+        $params = [
+            ':userId' => $userId,
+            ':username' => $username,
+            ':firstname' => $firstname,
+            ':lastname' => $lastname,
+            ':role' => $role
+        ];
+        
+        // If password is provided, update it
+        if (!empty($password)) {
+            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+            $query = 'UPDATE user SET 
+                      username = :username, 
+                      firstname = :firstname, 
+                      lastname = :lastname, 
+                      password = :password,
+                      role = :role 
+                      WHERE UserID = :userId';
+            $params[':password'] = $hashedPassword;
+        }
+        
+        return query($pdo, $query, $params);
+    }
+    
+    function deleteUser($pdo, $userId) {
+        // Begin transaction
+        $pdo->beginTransaction();
+        
+        try {
+            // First, check if user has posts
+            $params = [':userId' => $userId];
+            $postCheck = query($pdo, 'SELECT COUNT(*) as count FROM posts WHERE UserID = :userId', $params);
+            $hasPostsCount = $postCheck->fetch()['count'];
+            
+            if ($hasPostsCount > 0) {
+                throw new Exception("Cannot delete user with existing posts. Reassign or delete their posts first.");
+            }
+            
+            // Delete user comments
+            query($pdo, 'DELETE FROM comment WHERE UserID = :userId', $params);
+            
+            // Delete user feedback
+            query($pdo, 'DELETE FROM feedback WHERE UserID = :userId', $params);
+            
+            // Delete user
+            query($pdo, 'DELETE FROM user WHERE UserID = :userId', $params);
+            
+            $pdo->commit();
+            return true;
+        } catch (Exception $e) {
+            $pdo->rollBack();
+            throw $e;
+        }
+    }
+    
+    // Admin module management functions
+    function addModule($pdo, $moduleName) {
+        // Check if module already exists
+        $params = [':moduleName' => $moduleName];
+        $checkModule = query($pdo, 'SELECT * FROM modules WHERE moduleName = :moduleName', $params);
+            
+        if ($checkModule->rowCount() > 0) {
+            throw new Exception('Module already exists');
+        }
+        
+        $query = 'INSERT INTO modules (moduleName) VALUES (:moduleName)';
+        return query($pdo, $query, $params);
+    }
+    
+    function updateModule($pdo, $moduleId, $moduleName) {
+        // Check if module name already exists for another module
+        $params = [':moduleName' => $moduleName, ':moduleId' => $moduleId];
+        $checkModule = query($pdo, 'SELECT * FROM modules WHERE moduleName = :moduleName AND ModuleID != :moduleId', $params);
+            
+        if ($checkModule->rowCount() > 0) {
+            throw new Exception('Module name already exists');
+        }
+        
+        $query = 'UPDATE modules SET moduleName = :moduleName WHERE ModuleID = :moduleId';
+        return query($pdo, $query, $params);
+    }
+    
+    function deleteModule($pdo, $moduleId) {
+        // Begin transaction
+        $pdo->beginTransaction();
+        
+        try {
+            // First, check if module has posts
+            $params = [':moduleId' => $moduleId];
+            $postCheck = query($pdo, 'SELECT COUNT(*) as count FROM posts WHERE ModuleID = :moduleId', $params);
+            $hasPostsCount = $postCheck->fetch()['count'];
+            
+            if ($hasPostsCount > 0) {
+                throw new Exception("Cannot delete module with existing posts. Reassign or delete these posts first.");
+            }
+            
+            // Delete module
+            query($pdo, 'DELETE FROM modules WHERE ModuleID = :moduleId', $params);
+            
+            $pdo->commit();
+            return true;
+        } catch (Exception $e) {
+            $pdo->rollBack();
+            throw $e;
+        }
+    }
+    
+    // Admin post management functions
+    function getPostBasicInfo($pdo) {
+        $query = query($pdo, 'SELECT p.PostID, p.title, u.username, m.moduleName 
+                              FROM posts p
+                              INNER JOIN user u ON p.UserID = u.UserID
+                              INNER JOIN modules m ON p.ModuleID = m.ModuleID
+                              ORDER BY p.createdAt DESC');
+        return $query->fetchAll();
+    }
+    
+    function reassignPost($pdo, $postId, $userId, $moduleId) {
+        $query = 'UPDATE posts SET UserID = :userId, ModuleID = :moduleId WHERE PostID = :postId';
+        $params = [
+            ':postId' => $postId,
+            ':userId' => $userId,
+            ':moduleId' => $moduleId
+        ];
+        
+        return query($pdo, $query, $params);
+    }
+    
+    // Check if current user is admin and redirect if not
+    function requireAdmin() {
+        if (!isAdmin()) {
+            header('Location: /coursework/index.php');
+            exit();
+        }
+    }
+
     // module FUNCTION =================================================================================================
 
     function allModules($pdo){
