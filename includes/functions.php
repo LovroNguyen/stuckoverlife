@@ -174,6 +174,39 @@
         return $posts->fetchAll();
     }
 
+    function getPaginatedPosts($pdo, $page = 1, $postsPerPage = 10) {
+        // Calculate the offset
+        $offset = ($page - 1) * $postsPerPage;
+        
+        // Prepare the query
+        $stmt = $pdo->prepare(
+            'SELECT posts.*, user.username, user.avatar, modules.moduleName 
+            FROM posts
+            INNER JOIN user ON posts.userid = user.userid
+            INNER JOIN modules ON posts.moduleid = modules.moduleid
+            ORDER BY posts.createdAt DESC
+            LIMIT :limit OFFSET :offset'
+        );
+        
+        // Bind parameters with explicit type specification
+        $stmt->bindValue(':limit', $postsPerPage, PDO::PARAM_INT);
+        $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+        $stmt->execute();
+        
+        $posts = $stmt->fetchAll();
+        
+        // Get total number of posts (for pagination)
+        $countQuery = $pdo->query('SELECT COUNT(*) as total FROM posts');
+        $totalPosts = $countQuery->fetch()['total'];
+        $totalPages = ceil($totalPosts / $postsPerPage);
+        
+        return [
+            'posts' => $posts, 
+            'currentPage' => $page,
+            'totalPages' => $totalPages,
+            'totalPosts' => $totalPosts
+        ];
+    }
 
     function getPostWithDetails($pdo, $id) {
         $parameters = [':id' => $id];
@@ -336,24 +369,51 @@
         return $preview;
     }
 
-    function search($pdo, $searchTerm) {
+    function search($pdo, $searchTerm, $page = 1, $postsPerPage = 10) {
+        // Calculate the offset
+        $offset = ($page - 1) * $postsPerPage;
+        
         // Prepare search term for use in LIKE clause
         $searchParam = '%' . $searchTerm . '%';
-        $parameters = [':search' => $searchParam];
         
-        // Query posts matching search term in title or content
-        $query = query($pdo, 
-            'SELECT p.*, u.username, m.moduleName 
+        // Prepare the query 
+        $stmt = $pdo->prepare(
+            'SELECT p.*, u.username, u.avatar, m.moduleName 
             FROM posts p
             INNER JOIN user u ON p.UserID = u.UserID
             INNER JOIN modules m ON p.ModuleID = m.ModuleID
             WHERE p.title LIKE :search 
             OR p.content LIKE :search
-            ORDER BY p.createdAt DESC', 
-            $parameters
+            ORDER BY p.createdAt DESC
+            LIMIT :limit OFFSET :offset'
         );
         
-        return $query->fetchAll();
+        // Bind parameters with explicit type specification
+        $stmt->bindValue(':search', $searchParam, PDO::PARAM_STR);
+        $stmt->bindValue(':limit', $postsPerPage, PDO::PARAM_INT);
+        $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+        $stmt->execute();
+        
+        $posts = $stmt->fetchAll();
+        
+        // Get total matching posts for pagination
+        $countStmt = $pdo->prepare(
+            'SELECT COUNT(*) as total 
+            FROM posts p
+            WHERE p.title LIKE :search 
+            OR p.content LIKE :search'
+        );
+        $countStmt->bindValue(':search', $searchParam, PDO::PARAM_STR);
+        $countStmt->execute();
+        $totalPosts = $countStmt->fetch()['total'];
+        $totalPages = ceil($totalPosts / $postsPerPage);
+        
+        return [
+            'posts' => $posts,
+            'currentPage' => $page,
+            'totalPages' => $totalPages,
+            'totalPosts' => $totalPosts
+        ];
     }
 
     // user FUNCTION ===================================================================================================
