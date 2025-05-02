@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 20, 2025 at 07:49 AM
+-- Generation Time: Apr 28, 2025 at 11:11 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -30,22 +30,21 @@ SET time_zone = "+00:00";
 CREATE TABLE `asset` (
   `AssetID` int(11) NOT NULL,
   `mediaKey` varchar(255) NOT NULL,
-  `QuestionID` int(11) DEFAULT NULL,
-  `AnswerID` int(11) DEFAULT NULL
+  `QuestionID` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `asset`
 --
 
-INSERT INTO `asset` (`AssetID`, `mediaKey`, `QuestionID`, `AnswerID`) VALUES
-(1, 'post_67dbc881dae6a_Screenshot 2025-03-08 110639.png', 44, NULL),
-(5, 'post_67e391e9a6840_1064409568119103560.png', 3, NULL),
-(6, 'post_67e391e9a6ccb_1093569733514772500.png', 3, NULL),
-(7, 'post_67e391e9a7058_1130395935667662898.png', 3, NULL),
-(8, 'post_67e391e9a89e6_1225008802152321086.png', 3, NULL),
-(9, 'post_67e391e9a8eec_d672b1fa-4dea-48af-a4a9-dfeb53775bd5.png', 3, NULL),
-(10, 'post_67eb932fc663f_z5018282565171_f96185ca8d3abcf07102685d64282d92.jpg', 46, NULL);
+INSERT INTO `asset` (`AssetID`, `mediaKey`, `QuestionID`) VALUES
+(1, 'post_67dbc881dae6a_Screenshot 2025-03-08 110639.png', 44),
+(5, 'post_67e391e9a6840_1064409568119103560.png', 3),
+(6, 'post_67e391e9a6ccb_1093569733514772500.png', 3),
+(7, 'post_67e391e9a7058_1130395935667662898.png', 3),
+(8, 'post_67e391e9a89e6_1225008802152321086.png', 3),
+(9, 'post_67e391e9a8eec_d672b1fa-4dea-48af-a4a9-dfeb53775bd5.png', 3),
+(10, 'post_67eb932fc663f_z5018282565171_f96185ca8d3abcf07102685d64282d92.jpg', 46);
 
 -- --------------------------------------------------------
 
@@ -143,23 +142,32 @@ CREATE TABLE `posts` (
   `createdAt` datetime NOT NULL DEFAULT current_timestamp(),
   `updatedAt` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `AssetID` int(11) DEFAULT NULL,
-  `viewCount` int(11) DEFAULT 0,
-  `voteCount` int(11) DEFAULT 0
+  `viewCount` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `posts`
 --
 
-INSERT INTO `posts` (`PostID`, `title`, `content`, `ModuleID`, `UserID`, `createdAt`, `updatedAt`, `AssetID`, `viewCount`, `voteCount`) VALUES
-(3, 'test1', 'test1again', 1, 1, '2025-03-26 11:23:58', '2025-04-15 18:05:17', NULL, 75, 0),
-(39, 'Understanding SQL Indexes', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur porttitor vestibulum elit ut condimentum. Maecenas mollis orci vitae nunc interdum, eget posuere elit interdum. Interdum et malesuada fames ac ante ipsum primis in faucibus. Mauris ut ex elit. Cras in vehicula justo. In est dolor, sodales non tempus nec, suscipit ut odio. Proin eget leo nulla. Pellentesque ultricies interdum felis et convallis. Mauris vel sodales dolor, id ullamcorper mi. Donec venenatis sem non lorem porta rutrum. Nam euismod mauris turpis, ut commodo lacus ultrices sit amet. In hac habitasse platea dictumst. Nam erat nisi, semper sit amet pharetra nec, egestas et nisi. Nunc viverra nulla eget tellus posuere mattis. Aenean consequat sem purus, id hendrerit ante porttitor eget. Quisque eu ante at ipsum egestas rutrum vitae ac odio.\r\n\r\nQuisque ipsum mi, tempus vitae elit ut, pharetra fermentum augue. Mauris consectetur fermentum quam, vitae bibendum sem. Vestibulum placerat leo sit amet tortor ornare, non luctus eros bibendum. Suspendisse fringilla ullamcorper justo. Etiam interdum lacinia fermentum. Maecenas commodo euismod imperdiet. Nulla nec semper eros. Nunc a tempor ante. Nam ac posuere enim. Nulla ut tempus odio, quis ornare justo. Mauris vulputate pharetra ipsum non congue. Proin dapibus, tellus at porta mattis, ipsum mi sagittis quam, vel ultrices sem tellus non dolor. Ut scelerisque laoreet nunc ac sollicitudin. Vivamus vitae justo diam. Nulla facilisi. Nunc commodo dignissim massa in dictum.', 1, 5, '2025-03-14 16:52:22', '2025-04-15 13:47:43', NULL, 52, 3),
-(40, 'Introduction to Machine Learning', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce quis nisl suscipit, posuere tortor nec, luctus felis. Sed ultrices nisi quis erat tristique porta. Fusce placerat interdum lorem, tincidunt efficitur diam suscipit a. Ut vitae mollis quam. Cras tincidunt eros sed fringilla rutrum. Phasellus varius, mauris a ultricies posuere, velit dolor dapibus sem, sollicitudin lacinia tortor arcu vel augue. Praesent eleifend posuere augue, ut porta massa malesuada nec. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nullam et libero in velit finibus lobortis. Duis nulla justo, imperdiet eget consectetur in, ornare laoreet est. Phasellus magna nisl, blandit et rutrum ut, tempor eget est. Pellentesque interdum urna lacus, sed venenatis felis pharetra in. Sed tempus ipsum vitae sapien viverra, et posuere neque posuere. Donec blandit, est et ultricies semper, turpis ante dictum mauris, eget scelerisque justo ante sed sem. Integer sit amet luctus nulla. In cursus volutpat risus quis dignissim.', 1, 3, '2025-03-14 16:52:22', '2025-04-15 13:56:20', NULL, 87, 10),
-(41, 'Best Practices in Web Security', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin elementum consectetur mollis. Maecenas est est, convallis in eros vel, egestas cursus sapien. Sed congue maximus blandit. Duis placerat at nulla nec volutpat. Sed id libero ac dolor euismod varius. Sed molestie feugiat augue, eu auctor quam aliquet finibus. Aliquam tempor eget nunc et luctus. Sed dapibus, sapien non auctor interdum, risus dolor ultricies sapien, suscipit cursus turpis mi ut erat. Morbi sapien libero, placerat vitae urna sed, mollis vestibulum mauris. Cras lobortis enim vel leo tristique, a euismod eros rutrum. In eleifend ipsum vitae nunc dignissim, ac aliquet dui sollicitudin. Morbi efficitur risus quis venenatis tempus.\r\n\r\n', 1, 4, '2025-03-14 16:52:22', '2025-04-15 13:08:58', NULL, 129, 25),
-(42, 'Database Optimization Tips', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi in facilisis dui, id feugiat lectus. Nulla rutrum sapien et massa eleifend, faucibus ullamcorper mauris pharetra. Nam finibus risus et dictum venenatis. Quisque imperdiet pellentesque viverra. Cras luctus dignissim rutrum. Donec semper neque ac purus auctor auctor. Pellentesque bibendum odio metus, vitae tincidunt nisi pretium et. Quisque scelerisque eros id faucibus lacinia.', 1, 3, '2025-03-14 16:52:22', '2025-04-09 13:06:37', NULL, 20, 0),
-(43, 'How to Use ENUM in MySQL', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas condimentum lacus justo, et tristique nibh suscipit quis. Morbi efficitur sodales eleifend. In hac habitasse platea dictumst. Curabitur ornare ultrices odio vitae maximus. Ut nec posuere diam. Vivamus in finibus augue, sit amet rutrum sapien. In quis fringilla lacus. Etiam malesuada pretium metus. Cras ornare, enim nec posuere laoreet, turpis dui tempor leo, vel consequat erat augue ac lacus. Phasellus varius ac metus ut sagittis. Aenean non condimentum urna, quis scelerisque mauris. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vivamus maximus ipsum sit amet nulla interdum ornare. Nam sit amet massa quis turpis sagittis accumsan. Sed in dignissim nisi.', 1, 5, '2025-03-14 16:52:22', '2025-03-20 20:39:14', NULL, 86, 15),
-(44, 'My first post!!', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ornare lacus lacus, eu egestas metus vestibulum et. Integer sit amet aliquet urna. Nunc eget viverra orci. Fusce et ultricies nisi. Aliquam ut congue tortor, vitae consectetur velit. Sed gravida, dolor id ultricies vehicula, orci sem pharetra massa, quis aliquet purus dolor id neque. Duis facilisis vehicula tellus. Pellentesque facilisis velit eget mauris porta vehicula. Mauris a sapien mattis, semper quam in, tempus mauris. In hac habitasse platea dictumst. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Suspendisse porta est sed sem hendrerit bibendum.', 1, 2, '2025-03-20 14:49:21', '2025-04-09 13:06:50', 1, 66, 0),
-(46, 'Testing new Create Post Function', 'just testing, nothing much.', 1, 1, '2025-04-01 14:18:07', '2025-04-15 13:09:05', NULL, 14, 0);
+INSERT INTO `posts` (`PostID`, `title`, `content`, `ModuleID`, `UserID`, `createdAt`, `updatedAt`, `AssetID`, `viewCount`) VALUES
+(3, 'test1', 'test1again', 1, 1, '2025-03-26 11:23:58', '2025-04-28 11:13:48', NULL, 77),
+(39, 'Understanding SQL Indexes', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur porttitor vestibulum elit ut condimentum. Maecenas mollis orci vitae nunc interdum, eget posuere elit interdum. Interdum et malesuada fames ac ante ipsum primis in faucibus. Mauris ut ex elit. Cras in vehicula justo. In est dolor, sodales non tempus nec, suscipit ut odio. Proin eget leo nulla. Pellentesque ultricies interdum felis et convallis. Mauris vel sodales dolor, id ullamcorper mi. Donec venenatis sem non lorem porta rutrum. Nam euismod mauris turpis, ut commodo lacus ultrices sit amet. In hac habitasse platea dictumst. Nam erat nisi, semper sit amet pharetra nec, egestas et nisi. Nunc viverra nulla eget tellus posuere mattis. Aenean consequat sem purus, id hendrerit ante porttitor eget. Quisque eu ante at ipsum egestas rutrum vitae ac odio.\r\n\r\nQuisque ipsum mi, tempus vitae elit ut, pharetra fermentum augue. Mauris consectetur fermentum quam, vitae bibendum sem. Vestibulum placerat leo sit amet tortor ornare, non luctus eros bibendum. Suspendisse fringilla ullamcorper justo. Etiam interdum lacinia fermentum. Maecenas commodo euismod imperdiet. Nulla nec semper eros. Nunc a tempor ante. Nam ac posuere enim. Nulla ut tempus odio, quis ornare justo. Mauris vulputate pharetra ipsum non congue. Proin dapibus, tellus at porta mattis, ipsum mi sagittis quam, vel ultrices sem tellus non dolor. Ut scelerisque laoreet nunc ac sollicitudin. Vivamus vitae justo diam. Nulla facilisi. Nunc commodo dignissim massa in dictum.', 1, 5, '2025-03-14 16:52:22', '2025-04-26 16:10:16', NULL, 54),
+(40, 'Introduction to Machine Learning', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce quis nisl suscipit, posuere tortor nec, luctus felis. Sed ultrices nisi quis erat tristique porta. Fusce placerat interdum lorem, tincidunt efficitur diam suscipit a. Ut vitae mollis quam. Cras tincidunt eros sed fringilla rutrum. Phasellus varius, mauris a ultricies posuere, velit dolor dapibus sem, sollicitudin lacinia tortor arcu vel augue. Praesent eleifend posuere augue, ut porta massa malesuada nec. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nullam et libero in velit finibus lobortis. Duis nulla justo, imperdiet eget consectetur in, ornare laoreet est. Phasellus magna nisl, blandit et rutrum ut, tempor eget est. Pellentesque interdum urna lacus, sed venenatis felis pharetra in. Sed tempus ipsum vitae sapien viverra, et posuere neque posuere. Donec blandit, est et ultricies semper, turpis ante dictum mauris, eget scelerisque justo ante sed sem. Integer sit amet luctus nulla. In cursus volutpat risus quis dignissim.', 2, 3, '2025-03-14 16:52:22', '2025-04-20 13:40:35', NULL, 87),
+(41, 'Best Practices in Web Security', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin elementum consectetur mollis. Maecenas est est, convallis in eros vel, egestas cursus sapien. Sed congue maximus blandit. Duis placerat at nulla nec volutpat. Sed id libero ac dolor euismod varius. Sed molestie feugiat augue, eu auctor quam aliquet finibus. Aliquam tempor eget nunc et luctus. Sed dapibus, sapien non auctor interdum, risus dolor ultricies sapien, suscipit cursus turpis mi ut erat. Morbi sapien libero, placerat vitae urna sed, mollis vestibulum mauris. Cras lobortis enim vel leo tristique, a euismod eros rutrum. In eleifend ipsum vitae nunc dignissim, ac aliquet dui sollicitudin. Morbi efficitur risus quis venenatis tempus.\r\n\r\n', 1, 4, '2025-03-14 16:52:22', '2025-04-15 13:08:58', NULL, 129),
+(42, 'Database Optimization Tips', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi in facilisis dui, id feugiat lectus. Nulla rutrum sapien et massa eleifend, faucibus ullamcorper mauris pharetra. Nam finibus risus et dictum venenatis. Quisque imperdiet pellentesque viverra. Cras luctus dignissim rutrum. Donec semper neque ac purus auctor auctor. Pellentesque bibendum odio metus, vitae tincidunt nisi pretium et. Quisque scelerisque eros id faucibus lacinia.', 1, 3, '2025-03-14 16:52:22', '2025-04-09 13:06:37', NULL, 20),
+(43, 'How to Use ENUM in MySQL', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas condimentum lacus justo, et tristique nibh suscipit quis. Morbi efficitur sodales eleifend. In hac habitasse platea dictumst. Curabitur ornare ultrices odio vitae maximus. Ut nec posuere diam. Vivamus in finibus augue, sit amet rutrum sapien. In quis fringilla lacus. Etiam malesuada pretium metus. Cras ornare, enim nec posuere laoreet, turpis dui tempor leo, vel consequat erat augue ac lacus. Phasellus varius ac metus ut sagittis. Aenean non condimentum urna, quis scelerisque mauris. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vivamus maximus ipsum sit amet nulla interdum ornare. Nam sit amet massa quis turpis sagittis accumsan. Sed in dignissim nisi.', 1, 5, '2025-03-14 16:52:22', '2025-03-20 20:39:14', NULL, 86),
+(44, 'My first post!!', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ornare lacus lacus, eu egestas metus vestibulum et. Integer sit amet aliquet urna. Nunc eget viverra orci. Fusce et ultricies nisi. Aliquam ut congue tortor, vitae consectetur velit. Sed gravida, dolor id ultricies vehicula, orci sem pharetra massa, quis aliquet purus dolor id neque. Duis facilisis vehicula tellus. Pellentesque facilisis velit eget mauris porta vehicula. Mauris a sapien mattis, semper quam in, tempus mauris. In hac habitasse platea dictumst. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Suspendisse porta est sed sem hendrerit bibendum.', 1, 2, '2025-03-20 14:49:21', '2025-04-26 16:10:17', 1, 69),
+(46, 'Testing new Create Post Function', 'just testing, nothing much.', 1, 1, '2025-04-01 14:18:07', '2025-04-26 16:10:10', NULL, 16),
+(47, 'When the code works on the first try', 'That moment when your code runs without errors on the first try and you feel like a programming god. Then you realize you forgot to test all edge cases and spend the next 8 hours fixing bugs you created.', 3, 3, '2025-04-26 11:48:06', '2025-04-26 11:48:06', NULL, 51),
+(48, '404: Coffee Not Found', 'ERROR: Programmer not functioning.\nAwaiting caffeine input to continue operations.\nPlease refill coffee cup to resume debugging session.\nCritical system failure imminent!', 1, 1, '2025-04-26 11:48:06', '2025-04-28 11:13:33', NULL, 20),
+(49, 'CSS: Where \"!important\" is more important than your relationships', 'When you spend 5 hours trying to center a div, and end up with 15 !important tags in your CSS. Still doesn\'t work. Then you remember flexbox exists.', 3, 4, '2025-04-26 11:48:06', '2025-04-26 11:54:56', NULL, 58),
+(50, 'My code doesn\'t work and I have no idea why', 'My code works and I have no idea why. Programming is just copying and pasting from Stack Overflow until something works, and then never touching it again.', 3, 3, '2025-04-26 11:48:06', '2025-04-26 11:48:06', NULL, 93),
+(51, 'It\'s not a bug, it\'s an undocumented feature', 'Client: \"There\'s a bug in your code!\"\nMe: \"That\'s not a bug, it\'s an undocumented feature.\"\nManager: \"Brilliant, add it to the marketing materials!\"', 3, 1, '2025-04-26 11:48:06', '2025-04-26 11:48:06', NULL, 54),
+(52, 'Naming variables is harder than naming children', 'Two hardest things in programming:\n1. Naming things\n2. Cache invalidation\n3. Off-by-one errors', 3, 3, '2025-04-26 11:48:06', '2025-04-26 11:48:06', NULL, 8),
+(53, 'The real reason programmers work at night', 'Why programmers work best at night:\n- No meetings\n- No managers\n- No interruptions\n- Just you, your code, and the existential dread of the bugs you\'ll create', 4, 3, '2025-04-26 11:48:06', '2025-04-26 11:54:58', NULL, 61),
+(54, 'When you fix one bug and create 10 more', 'Fixing bugs in production be like: 99 little bugs in the code, 99 little bugs. Take one down, patch it around, 127 little bugs in the code.', 2, 9, '2025-04-26 11:48:06', '2025-04-26 11:48:06', NULL, 44),
+(55, 'JavaScript: Where undefined is not null, but null is undefined', 'JavaScript equality:\nnull == undefined // true\nnull === undefined // false\nnull == null // true\nnull === null // true\nundefined == undefined // true\nundefined === undefined // true\n\nMe: This is fine. Everything is fine.', 1, 9, '2025-04-26 11:48:06', '2025-04-26 11:54:53', NULL, 35),
+(56, 'The evolution of a programmer', 'Year 1: \"I can build anything!\"\nYear 2: \"I need to check Stack Overflow first.\"\nYear 5: \"Let me see if there\'s a library for this.\"\nYear 10: \"Let\'s just use Excel.\"', 3, 9, '2025-04-26 11:48:06', '2025-04-26 11:48:06', NULL, 57);
 
 -- --------------------------------------------------------
 
@@ -263,9 +271,7 @@ DELIMITER ;
 --
 ALTER TABLE `asset`
   ADD PRIMARY KEY (`AssetID`),
-  ADD UNIQUE KEY `AnswerID` (`AnswerID`),
-  ADD KEY `fk_Photo_Question` (`QuestionID`),
-  ADD KEY `AnswerID_2` (`AnswerID`);
+  ADD KEY `fk_Photo_Question` (`QuestionID`);
 
 --
 -- Indexes for table `comment`
@@ -342,7 +348,7 @@ ALTER TABLE `modules`
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `PostID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `PostID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- AUTO_INCREMENT for table `random-avatar`
@@ -364,7 +370,6 @@ ALTER TABLE `user`
 -- Constraints for table `asset`
 --
 ALTER TABLE `asset`
-  ADD CONSTRAINT `fk_Photo_Answer` FOREIGN KEY (`AnswerID`) REFERENCES `answer` (`AnswerID`) ON DELETE CASCADE,
   ADD CONSTRAINT `fk_Photo_Question` FOREIGN KEY (`QuestionID`) REFERENCES `posts` (`PostID`) ON DELETE CASCADE;
 
 --
