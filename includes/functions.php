@@ -95,13 +95,8 @@
                 
                 // Generate unique filename
                 $fileName = uniqid('post_') . '_' . $_FILES['images']['name'][$i];
-                $uploadPath = 'uploads/' . $fileName;
-                
-                // Create uploads directory if it doesn't exist
-                if (!file_exists('uploads')) {
-                    mkdir('uploads', 0777, true);
-                }
-                
+                $uploadPath = $_SERVER['DOCUMENT_ROOT'] . '/coursework/uploads/' . $fileName;
+
                 // Move uploaded file
                 if (move_uploaded_file($_FILES['images']['tmp_name'][$i], $uploadPath)) {
                     // Insert new asset
@@ -532,8 +527,10 @@
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
         
         // Generate random avatar
-        $avatarFilename = 'identicon-' . rand(1000000000000, 9999999999999) . '.png';
-        
+        $avatarDir = $_SERVER['DOCUMENT_ROOT'] . '/coursework/assets/images/random_pfp/';
+        $avatarFiles = glob($avatarDir . '*.png');
+        $randomAvatar = basename($avatarFiles[array_rand($avatarFiles)]);
+        $avatarFilename = $randomAvatar;        
         // Create user
         $query = 'INSERT INTO user (username, firstname, lastname, password, avatar, role, createdAt) 
                   VALUES (:username, :firstname, :lastname, :password, :avatar, :role, NOW())';

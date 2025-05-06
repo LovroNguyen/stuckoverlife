@@ -52,8 +52,8 @@ try {
                         
                         // Generate unique filename
                         $fileName = uniqid('post_') . '_' . $_FILES['images']['name'][$i];
-                        $uploadPath = 'uploads/' . $fileName;
-                        
+                        $uploadPath = $_SERVER['DOCUMENT_ROOT'] . '/coursework/uploads/' . $fileName;
+                                                
                         // Create uploads directory if it doesn't exist
                         if (!file_exists('uploads')) {
                             mkdir('uploads', 0777, true);
@@ -72,7 +72,7 @@ try {
                 $pdo->commit();
                 
                 // Redirect to index page after successful post creation
-                header('Location: index.php');
+                header('Location: /coursework/index.php');
                 exit();
             } catch (Exception $e) {
                 $pdo->rollBack();

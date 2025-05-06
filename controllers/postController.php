@@ -82,8 +82,8 @@ switch ($action) {
                         
                         // Generate unique filename
                         $fileName = uniqid('post_') . '_' . $_FILES['images']['name'][$i];
-                        $uploadPath = '../uploads/' . $fileName;
-                        
+                        $uploadPath = $_SERVER['DOCUMENT_ROOT'] . '/coursework/uploads/' . $fileName;
+                                                
                         // Create uploads directory if it doesn't exist
                         if (!file_exists('../uploads')) {
                             mkdir('../uploads', 0777, true);
