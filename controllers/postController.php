@@ -83,7 +83,7 @@ switch ($action) {
                         // Generate unique filename
                         $fileName = uniqid('post_') . '_' . $_FILES['images']['name'][$i];
                         $uploadPath = $_SERVER['DOCUMENT_ROOT'] . '/coursework/uploads/' . $fileName;
-                                                
+
                         // Create uploads directory if it doesn't exist
                         if (!file_exists('../uploads')) {
                             mkdir('../uploads', 0777, true);
@@ -103,7 +103,7 @@ switch ($action) {
                 $pdo->commit();
                 
                 // Redirect to view the post
-                header('Location: /coursework/posts.php?id=' . $postId);
+                header('Location: /coursework/models/posts.php?id=' . $postId);
                 exit();
             } catch (Exception $e) {
                 $pdo->rollBack();
@@ -118,7 +118,7 @@ switch ($action) {
             // Display edit form
             // Verify user owns this post
             if (!userOwnsPost($pdo, $postId, $userId)) {
-                header('Location: /coursework/posts.php?id=' . $postId);
+                header('Location: /coursework/models/posts.php?id=' . $postId);
                 exit();
             }
             
